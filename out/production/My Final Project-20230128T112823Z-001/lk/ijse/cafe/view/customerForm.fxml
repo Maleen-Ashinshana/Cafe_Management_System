@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="pane" prefHeight="468.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.CustomerFormController">
+   <children>
+      <Text fill="#0fdab8" layoutX="293.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblCustomer" layoutX="7.0" layoutY="236.0" prefHeight="200.0" prefWidth="719.0">
+        <columns>
+          <TableColumn fx:id="colCustomerId" prefWidth="223.0" text="Customer Id" />
+          <TableColumn fx:id="colCustomerName" prefWidth="494.0" text="Name" />
+        </columns>
+      </TableView>
+      <Text layoutX="27.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Id" wrappingWidth="91.78125">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="customerId" layoutX="137.0" layoutY="96.0" onAction="#cusromerNameOnAction" promptText="Customer Id" />
+      <Text layoutX="380.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name" wrappingWidth="130.78125">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <JFXButton layoutX="526.0" layoutY="182.0" onAction="#btnAddOnAction" style="-fx-background-color: Blue; -fx-background-radius: 30  30 30 30;" text="Add" />
+      <JFXButton layoutX="604.0" layoutY="181.0" onAction="#btnUpdateOnAction" style="-fx-background-color: Green; -fx-background-radius: 30  30 30 30;" text="Update" />
+      <JFXButton layoutX="649.0" layoutY="436.0" onAction="#btnRefreshOnAction" style="-fx-background-color: Red; -fx-background-radius: 30  30 30 30;" text="Refesh" />
+      <JFXTextField fx:id="customerName" layoutX="520.0" layoutY="96.0" promptText="CustomerName" />
+   </children>
+</AnchorPane>

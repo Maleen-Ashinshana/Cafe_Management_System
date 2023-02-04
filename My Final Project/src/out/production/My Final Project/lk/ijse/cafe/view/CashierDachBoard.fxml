@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="805.0" prefWidth="1278.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.CashierDachBoardController">
+   <children>
+      <AnchorPane layoutY="-3.0" prefHeight="130.0" prefWidth="1281.0" style="-fx-background-color: Black;">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="88.0" layoutX="260.0" layoutY="52.0">
+               <image>
+                  <Image url="@../access/logo/open24.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="784.0" layoutY="59.0" text="Date :" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="552.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cashier">
+               <font>
+                  <Font name="System Bold" size="41.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblDate" layoutX="859.0" layoutY="49.0" prefHeight="52.0" prefWidth="154.0" textFill="#240be1">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="1066.0" layoutY="63.0" text="Time:" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTime" layoutX="1123.0" layoutY="48.0" prefHeight="52.0" prefWidth="141.0" textFill="#240be1">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="127.0" prefHeight="679.0" prefWidth="189.0" style="-fx-background-color: black;">
+         <children>
+            <JFXButton layoutX="14.0" layoutY="51.0" onAction="#dashBordOnAction" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: #27ae60; -fx-background-radius: 40 40 40 40;" text="Menu" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="37.0" layoutY="617.0" onAction="#backOnAction" prefWidth="71.0" style="-fx-background-color: #95a5a6; -fx-background-radius: 20 20 20 20;" text="Back" />
+            <JFXButton layoutX="2.0" layoutY="151.0" onAction="#placeOrderOnAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #27ae60; -fx-background-radius: 40 40 40 40;" text="Place Order Form" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="1.0" layoutY="231.0" onAction="#btnOrdersOnAction" prefHeight="55.0" prefWidth="183.0" style="-fx-background-color: #27ae60; -fx-background-radius: 40 40 40 40;" text="Orders" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane" layoutX="189.0" layoutY="127.0" prefHeight="679.0" prefWidth="1092.0" />
+      <ImageView fitHeight="85.0" fitWidth="211.0" layoutX="2.0" layoutY="15.0">
+         <image>
+            <Image url="@../access/logo/Peppermint-Cafe-Logo-in-White.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

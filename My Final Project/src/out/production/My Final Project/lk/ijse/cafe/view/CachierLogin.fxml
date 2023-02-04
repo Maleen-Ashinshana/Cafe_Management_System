@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.CachierLoginController">
+   <children>
+      <AnchorPane prefHeight="125.0" prefWidth="793.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="84.0" layoutX="667.0" layoutY="35.0">
+               <image>
+                  <Image url="@../access/logo/open24.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="txtName" layoutX="209.0" layoutY="312.0" prefHeight="43.0" prefWidth="421.0" promptText="User Name" />
+      <JFXButton layoutX="350.0" layoutY="470.0" onAction="#btnLogingOnAction" prefHeight="51.0" prefWidth="131.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: Blue;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="31.0" fitWidth="38.0" layoutX="150.0" layoutY="397.0">
+         <image>
+            <Image url="@../access/logo/icons8-lock-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="149.0" layoutY="323.0">
+         <image>
+            <Image url="@../access/logo/icons8-male-user-50.png" />
+         </image>
+      </ImageView>
+      <JFXPasswordField fx:id="Password" layoutX="208.0" layoutY="385.0" prefHeight="43.0" prefWidth="430.0" promptText="Password" />
+      <Accordion layoutX="31.0" layoutY="164.0" />
+      <JFXButton layoutX="14.0" layoutY="516.0" onAction="#btnBackOnAction" prefHeight="43.0" prefWidth="64.0" style="-fx-background-color: #95a5a6; -fx-background-radius: 20 20 20 20;" text="Back" />
+      <ImageView fitHeight="125.0" fitWidth="131.0" layoutX="325.0" layoutY="136.0">
+         <image>
+            <Image url="@../access/images/cashier.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="303.0" layoutX="244.0" layoutY="7.0">
+         <image>
+            <Image url="@../access/logo/Peppermint-Cafe-Logo-in-White.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblInvalidUserName" layoutX="208.0" layoutY="356.0" prefHeight="21.0" prefWidth="421.0" textFill="#dd1212">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblinavalidPassword" layoutX="208.0" layoutY="428.0" prefHeight="21.0" prefWidth="430.0" textFill="#dd0505">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

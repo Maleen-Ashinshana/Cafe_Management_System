@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1092.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.OrderViewsFormController">
+   <children>
+      <TableView fx:id="tblOrder" layoutX="5.0" layoutY="85.0" prefHeight="550.0" prefWidth="1086.0">
+        <columns>
+          <TableColumn fx:id="colOrderId" prefWidth="97.0" text="Order Id" />
+          <TableColumn fx:id="colItemCode" prefWidth="118.0" text="Item Code" />
+            <TableColumn fx:id="colDescription" prefWidth="428.0" text="Decsription" />
+            <TableColumn fx:id="colQty" prefWidth="70.0" text="Qty" />
+            <TableColumn fx:id="colDate" prefWidth="131.0" text="Date" />
+            <TableColumn fx:id="colCustomerId" prefWidth="108.0" text="Customer Id" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="133.0" text="Unit Price" />
+        </columns>
+      </TableView>
+      <JFXButton layoutX="991.0" layoutY="640.0" onAction="#btnReloadOnAction" style="-fx-background-color: Red;" text="Reload" />
+   </children>
+</AnchorPane>

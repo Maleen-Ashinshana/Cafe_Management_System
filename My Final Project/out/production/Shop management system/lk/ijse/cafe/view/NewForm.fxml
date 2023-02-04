@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" prefHeight="568.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.NewFormController">
+   <children>
+      <AnchorPane prefHeight="117.0" prefWidth="795.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="82.0" fitWidth="123.0" layoutX="4.0" layoutY="11.0">
+               <image>
+                  <Image url="@../access/logo/peppermint-logo-big.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="84.0" layoutX="654.0" layoutY="21.0">
+               <image>
+                  <Image url="@../access/logo/open24.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="254.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Peppermint Cafe">
+               <font>
+                  <Font name="System Italic" size="38.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="537.0" layoutY="194.0" onAction="#ManagerOnAction" prefHeight="69.0" prefWidth="211.0" style="-fx-background-color: #3498db;" text="Login for Manager">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="537.0" layoutY="396.0" onAction="#loginCachierOnActuon" prefHeight="82.0" prefWidth="217.0" style="-fx-background-color: #3498db;" text="Login for Cachier">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="100.0" fitWidth="107.0" layoutX="410.0" layoutY="184.0">
+         <image>
+            <Image url="@../access/logo/1802979.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="419.0" layoutY="393.0">
+         <image>
+            <Image url="@../access/logo/depositphotos_224513734-stock-illustration-cashier-icon-cashier-symbol-design.jpg" />
+         </image>
+      </ImageView>
+      <Line endX="31.0" layoutX="542.0" layoutY="333.0" startX="-132.0" />
+      <ImageView fitHeight="398.0" fitWidth="376.0" layoutX="24.0" layoutY="143.0">
+         <image>
+            <Image url="@../access/images/img.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="582.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Line endX="15.0" layoutX="765.0" layoutY="332.0" startX="-135.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="MainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1278.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.ManagerDashBoardFomController">
+   <children>
+      <AnchorPane layoutY="-1.0" prefHeight="98.0" prefWidth="1278.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="41.0" fitWidth="86.0" layoutX="282.0" layoutY="34.0">
+               <image>
+                  <Image url="@../access/logo/open24.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="539.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager " wrappingWidth="216.0703125">
+               <font>
+                  <Font name="System Bold" size="46.0" />
+               </font>
+            </Text>
+            <Label layoutX="791.0" layoutY="43.0" text="Date :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="1033.0" layoutY="43.0" text="Time :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDate" layoutX="869.0" layoutY="34.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="145.0" textFill="#0cc2da">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTime" layoutX="1102.0" layoutY="27.0" prefHeight="55.0" prefWidth="169.0" textFill="#0cc2da">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="97.0" prefHeight="710.0" prefWidth="389.0" style="-fx-background-color: Black;">
+         <children>
+            <JFXButton layoutX="27.0" layoutY="212.0" onAction="#placeStokeOnaction" prefHeight="55.0" prefWidth="295.0" style="-fx-background-color: #27ae60; -fx-background-radius: 30 30 30 30;" text="Place Stoke" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="32.0" layoutY="669.0" onAction="#backOnAction" prefHeight="31.0" prefWidth="58.0" style="-fx-background-color: #95a5a6; -fx-background-radius: 20 20 20 20;" text="Back" />
+            <JFXButton layoutX="27.0" layoutY="39.0" onAction="#ItemsOnAction" prefHeight="55.0" prefWidth="295.0" style="-fx-background-color: #27ae60; -fx-background-radius: 30 30 30 30;" text="Items " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="27.0" layoutY="128.0" onAction="#employeOnAction" prefHeight="55.0" prefWidth="295.0" style="-fx-background-color: #27ae60; -fx-background-radius: 30 30 30 30;" text="Employe" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="2.0" layoutY="597.0" onAction="#btnCreateAccount" prefHeight="55.0" prefWidth="376.0" style="-fx-background-color: #27ae60; -fx-background-radius: 30 30 30 30;" text="Create Account For Cashier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane" layoutX="387.0" layoutY="97.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="710.0" prefWidth="891.0" style="-fx-background-color: white;" />
+      <ImageView fitHeight="77.0" fitWidth="239.0" layoutX="12.0" layoutY="7.0">
+         <image>
+            <Image url="@../access/logo/Peppermint-Cafe-Logo-in-White.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

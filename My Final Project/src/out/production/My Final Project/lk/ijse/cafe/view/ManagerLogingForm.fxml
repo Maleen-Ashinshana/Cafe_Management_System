@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" prefHeight="568.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.ManagerLogingFormController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="789.0" style="-fx-background-color: Black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fitHeight="133.0" fitWidth="146.0" layoutX="314.0" layoutY="140.0">
+         <image>
+            <Image url="@../access/logo/1802979.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="txtUserName" focusColor="#324068" layoutX="214.0" layoutY="312.0" prefHeight="39.0" prefWidth="368.0" promptText="User Name" />
+      <JFXPasswordField fx:id="txtPassword" layoutX="212.0" layoutY="382.0" prefHeight="39.0" prefWidth="368.0" promptText="Passwood" />
+      <JFXButton layoutX="318.0" layoutY="456.0" onAction="#logingOnAction" prefHeight="39.0" prefWidth="157.0" style="-fx-background-color: Blue; -fx-background-radius: 30 30 30 30;" text="Loging" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Line endX="81.0" layoutX="290.0" layoutY="512.0" startX="-41.0" />
+      <Line endX="69.0" layoutX="474.0" layoutY="515.0" startX="-50.0" />
+      <Text layoutX="381.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" wrappingWidth="35.28076171875">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <JFXButton layoutX="220.0" layoutY="521.0" onAction="#createAccountOnAction" prefHeight="44.0" prefWidth="344.0" style="-fx-background-color: #34495e; -fx-background-radius: 30 30 30 30;" text="Create Account" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="165.0" layoutY="322.0">
+         <image>
+            <Image url="@../access/logo/icons8-male-user-50.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="163.0" layoutY="389.0">
+         <image>
+            <Image url="@../access/logo/icons8-lock-64.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="9.0" layoutY="520.0" onAction="#btnBackOnAction" prefHeight="39.0" prefWidth="63.0" style="-fx-background-color: #95a5a6; -fx-background-radius: 20 20 20 20;" text="Back">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></JFXButton>
+      <ImageView fitHeight="100.0" fitWidth="303.0" layoutX="239.0" layoutY="13.0">
+         <image>
+            <Image url="@../access/logo/Peppermint-Cafe-Logo-in-White.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblUserName" layoutX="214.0" layoutY="354.0" prefHeight="21.0" prefWidth="368.0" textFill="#e10b0b">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPassword" layoutX="211.0" layoutY="424.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="368.0" textFill="#da0c0c">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

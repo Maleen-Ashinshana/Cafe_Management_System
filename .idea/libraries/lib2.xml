@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lib2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/My Final Project/src/lk/ijse/cafe/lib/mysql-connector-java-8.0.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/My Final Project/src/lk/ijse/cafe/lib/jfoenix-8.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/My Final Project/src/lk/ijse/cafe/lib/AnimateFX-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

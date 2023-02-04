@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="538.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.BeveregesFormController">
+   <children>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="8.0" layoutY="6.0">
+         <image>
+            <Image url="@../access/images/blue-curacao-Mojito.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="10.0" layoutY="274.0">
+         <image>
+            <Image url="@../access/images/lastpi1122.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="225.0" layoutY="8.0">
+         <image>
+            <Image url="@../access/images/Orange-Mojito.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="226.0" layoutY="276.0">
+         <image>
+            <Image url="@../access/images/Oreo-Shake.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="444.0" layoutY="8.0">
+         <image>
+            <Image url="@../access/images/Coke-Float.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="666.0" layoutY="8.0">
+         <image>
+            <Image url="@../access/images/Cappucino-Caffe-Latte.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="888.0" layoutY="9.0">
+         <image>
+            <Image url="@../access/images/Latte-Macchiato.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="180.0" layoutX="448.0" layoutY="277.0">
+         <image>
+            <Image url="@../access/images/Strawberry-banana-smoothie.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="649.0" layoutY="275.0">
+         <image>
+            <Image url="@../access/images/chocomilo11.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="880.0" layoutY="276.0">
+         <image>
+            <Image url="@../access/images/Mango-and-Strawberry.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="26.0" layoutY="209.0" text="Blue Curacao Mojito">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="230.0" text="Rs.590">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="209.0" text="Orange Mojito">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="230.0" text="Rs.770">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="508.0" layoutY="209.0" text="Coke Float">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="526.0" layoutY="230.0" text="Rs.350">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="742.0" layoutY="209.0" text="Cafe Latte">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="754.0" layoutY="229.0" text="Rs.490">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="932.0" layoutY="210.0" text="Latte Macchiato">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="959.0" layoutY="230.0" text="Rs.490">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="475.0" text="Vanilla Shake">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="496.0" text="Rs.590">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="281.0" layoutY="476.0" text="Oreo Shake">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="497.0" text="Rs.800">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="448.0" layoutY="476.0" prefHeight="42.0" prefWidth="180.0" text="Strawberry and banana smoothie" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="487.0" layoutY="514.0" text="Rs.350">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="676.0" layoutY="476.0" text="Choco Milk Affogato">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="719.0" layoutY="496.0" text="Rs.560">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="867.0" layoutY="477.0" text="Mango &amp; Strawberry Smoothie">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="953.0" layoutY="497.0" text="Rs.620">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

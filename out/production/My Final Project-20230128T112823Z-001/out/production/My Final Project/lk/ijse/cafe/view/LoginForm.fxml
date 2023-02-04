@@ -1,0 +1,67 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--<?import com.jfoenix.controls.JFXButton?>-->
+<!--<?import javafx.scene.Cursor?>-->
+<!--<?import javafx.scene.control.Label?>-->
+<!--<?import javafx.scene.image.Image?>-->
+<!--<?import javafx.scene.image.ImageView?>-->
+<!--<?import javafx.scene.layout.AnchorPane?>-->
+<!--<?import javafx.scene.shape.Line?>-->
+<!--<?import javafx.scene.text.Font?>-->
+
+<!--<AnchorPane id="AnchorPane" fx:id="pane" fitWidth="107.0" layoutX="100.0" prefHeight="527.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.LoginFormController">-->
+<!--    <children>-->
+<!--        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />-->
+<!--      <ImageView fitHeight="410.0" fitWidth="437.0" layoutX="6.0" layoutY="109.0" opacity="0.88">-->
+<!--         <image>-->
+<!--            <Image url="@../access/images/cafe-in-colombo.jpg" />-->
+<!--         </image>-->
+<!--      </ImageView>-->
+<!--      <AnchorPane layoutX="6.0" layoutY="6.0" prefHeight="102.0" prefWidth="824.0" style="-fx-background-color: black;">-->
+<!--         <children>-->
+<!--            <Label layoutX="289.0" layoutY="30.0" text="Peppermint Cafe" textFill="WHITE">-->
+<!--               <font>-->
+<!--                  <Font name="Book Antiqua" size="38.0" />-->
+<!--               </font>-->
+<!--            </Label>-->
+<!--            <ImageView fitHeight="87.0" fitWidth="131.0" layoutX="3.0" layoutY="7.0">-->
+<!--               <image>-->
+<!--                  <Image url="@../access/logo/peppermint-logo-big.gif" />-->
+<!--               </image>-->
+<!--            </ImageView>-->
+<!--            <ImageView fitHeight="54.0" fitWidth="97.0" layoutX="698.0" layoutY="24.0">-->
+<!--               <image>-->
+<!--                  <Image url="@../access/logo/open24.png" />-->
+<!--               </image>-->
+<!--            </ImageView>-->
+<!--         </children>-->
+<!--      </AnchorPane>-->
+<!--      <JFXButton layoutX="625.0" layoutY="203.0" onAction="#managerOnAction" prefHeight="76.0" prefWidth="194.0" style="-fx-background-color: #2980b9;" text=" Manager">-->
+<!--         <font>-->
+<!--            <Font name="System Bold" size="32.0" />-->
+<!--         </font>-->
+<!--         <cursor>-->
+<!--            <Cursor fx:constant="HAND" />-->
+<!--         </cursor>-->
+<!--      </JFXButton>-->
+<!--      <JFXButton layoutX="630.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cachierOnAction" prefHeight="76.0" prefWidth="184.0" style="-fx-background-color: #2980b9;" text=" Cachier">-->
+<!--         <font>-->
+<!--            <Font name="System Bold" size="33.0" />-->
+<!--         </font>-->
+<!--         <cursor>-->
+<!--            <Cursor fx:constant="HAND" />-->
+<!--         </cursor>-->
+<!--      </JFXButton>-->
+<!--      <Line endX="275.0" layoutX="546.0" layoutY="299.0" startX="-100.0" />-->
+<!--      <ImageView fitHeight="102.0" fitWidth="107.0" layoutX="471.0" layoutY="187.0">-->
+<!--         <image>-->
+<!--            <Image url="@../access/logo/1802979.png" />-->
+<!--         </image>-->
+<!--      </ImageView>-->
+<!--      <ImageView fitHeight="102.0" fitWidth="107.0" layoutX="473.0" layoutY="329.0">-->
+<!--         <image>-->
+<!--            <Image url="@../access/logo/depositphotos_224513734-stock-illustration-cashier-icon-cashier-symbol-design.jpg" />-->
+<!--         </image>-->
+<!--      </ImageView>-->
+<!--    </children>-->
+<!--</AnchorPane>-->

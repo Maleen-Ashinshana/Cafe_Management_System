@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="538.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.SaladFormController">
+   <children>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="37.0" layoutY="3.0">
+         <image>
+            <Image url="@../access/images/ae2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="42.0" layoutY="203.0" prefHeight="49.0" prefWidth="187.0" text="Spicy backed chicken with Asian cucumber Salad" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="92.0" layoutY="247.0" text="Rs. 990">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="306.0" layoutY="7.0">
+         <image>
+            <Image url="@../access/images/ae4.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="313.0" layoutY="203.0" prefHeight="49.0" prefWidth="220.0" text="Hawaiian salad with chickpeas,Sweet corn avacado" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="361.0" layoutY="247.0" text="Rs. 900">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="572.0" layoutY="7.0">
+         <image>
+            <Image url="@../access/images/ae3.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="580.0" layoutY="207.0" prefHeight="43.0" prefWidth="187.0" text="Grilled chicken with Caesar salad" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="639.0" layoutY="247.0" text="Rs. 1100">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="838.0" layoutY="7.0">
+         <image>
+            <Image url="@../access/images/King-fish-with-Caesar-salad.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="893.0" layoutY="210.0" prefHeight="21.0" prefWidth="132.0" text="Caesar salad" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="907.0" layoutY="227.0" text="Rs. 1450">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="37.0" layoutY="276.0">
+         <image>
+            <Image url="@../access/images/ae12.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="45.0" layoutY="480.0" prefHeight="21.0" prefWidth="187.0" text="Som Tum Papaya Salad" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="504.0" text="Rs. 710">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="295.0" layoutY="276.0">
+         <image>
+            <Image url="@../access/images/ae13.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="276.0" layoutY="474.0" prefHeight="29.0" prefWidth="238.0" text="Peppermint Green Garden Salad" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="361.0" layoutY="504.0" text="Rs. 950">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="205.0" layoutX="546.0" layoutY="276.0">
+         <image>
+            <Image url="@../access/images/beefsdn.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="579.0" layoutY="476.0" prefHeight="29.0" prefWidth="139.0" text="Pulleed Beef Salad" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="606.0" layoutY="504.0" text="Rs. 1130">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.NewFormController">
+   <children>
+      <AnchorPane prefHeight="117.0" prefWidth="795.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
+         <children>
+            <ImageView fitHeight="45.0" fitWidth="84.0" layoutX="654.0" layoutY="22.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="22.0">
+               <image>
+                  <Image url="@../access/logo/open24.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="303.0" layoutX="232.0" layoutY="7.0">
+               <image>
+                  <Image url="@../access/logo/Peppermint-Cafe-Logo-in-White.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="508.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginCachierOnActuon" prefHeight="82.0" prefWidth="284.0" style="-fx-background-color: Blue; -fx-background-radius: 30 30 30 30;" text="Login for Cachier" textFill="WHITE" AnchorPane.bottomAnchor="93.0" AnchorPane.rightAnchor="1.0">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+      <Line endX="31.0" layoutX="542.0" layoutY="333.0" startX="-132.0" AnchorPane.bottomAnchor="234.5" AnchorPane.leftAnchor="409.5" AnchorPane.rightAnchor="219.5" AnchorPane.topAnchor="332.5" />
+      <ImageView disable="true" fitHeight="418.0" fitWidth="382.0" layoutX="20.0" layoutY="130.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="391.0" AnchorPane.topAnchor="130.0">
+         <image>
+            <Image url="@../access/images/img.png" />
+         </image>
+         <rotationAxis>
+            <Point3D x="10.0" y="10.0" z="10.0" />
+         </rotationAxis>
+      </ImageView>
+      <Text layoutX="579.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" AnchorPane.leftAnchor="578.9228515625" AnchorPane.rightAnchor="173.0771484375" AnchorPane.topAnchor="307.2783203125">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Line endX="15.0" layoutX="763.0" layoutY="334.0" startX="-135.0" AnchorPane.bottomAnchor="233.5" AnchorPane.leftAnchor="627.5" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="333.5" />
+      <JFXButton contentDisplay="TOP" layoutY="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ManagerOnAction" prefHeight="82.0" prefWidth="275.0" style="-fx-background-color: Blue; -fx-background-radius: 30 30 30 30;" text="Login for Manager" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="516.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="193.0">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="412.0" layoutY="379.0">
+         <image>
+            <Image url="@../access/images/cashier.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="102.0" layoutX="410.0" layoutY="183.0">
+         <image>
+            <Image url="@../access/logo/manager.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
