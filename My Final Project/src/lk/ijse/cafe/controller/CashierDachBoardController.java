@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lk.ijse.cafe.util.CashierSetDate;
 import lk.ijse.cafe.util.Navigation;
@@ -77,6 +78,7 @@ public class CashierDachBoardController implements Initializable {
         Scene scene = new Scene(load);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
     private void loadDate(Label lblDate,Label  lblTime){

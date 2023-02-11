@@ -16,8 +16,6 @@ public class DashBordFormController {
     private AnchorPane pane1;
 
     public void manOnAction(ActionEvent actionEvent) throws IOException {
-//        pane1.getChildren().clear();
-//        Navigation.navigation(Routs.MAIN,pane1);
         Navigation.navigation(Routs.MAIN,pane2);
     }
 

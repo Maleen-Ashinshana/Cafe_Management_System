@@ -31,11 +31,12 @@ public class Convertor {
     }
 
     public OrderDetailsDTO fromOrderDetails(OrderDetailsEntity orderDetailsEntity){
-        return new OrderDetailsDTO(orderDetailsEntity.getOrder_id(),orderDetailsEntity.getItem_code(),orderDetailsEntity.getQty(),orderDetailsEntity.getUnitPrice(),orderDetailsEntity.getDate());
+        return new OrderDetailsDTO(orderDetailsEntity.getOrder_id(),orderDetailsEntity.getItem_code(),orderDetailsEntity.getQty(),orderDetailsEntity.getUnitPrice(),String.valueOf(orderDetailsEntity.getDate()));
     }
 
     public OrderDetailsEntity toOrderDetails(OrderDetailsDTO orderDetailsDTO){
-        return new OrderDetailsEntity(orderDetailsDTO.getOrder_id(),orderDetailsDTO.getItem_code(),orderDetailsDTO.getQty(),orderDetailsDTO.getUnitPrice(),orderDetailsDTO.getDate());
+        System.out.println(orderDetailsDTO.getItem_code());
+        return new OrderDetailsEntity(orderDetailsDTO.getOrder_id(),orderDetailsDTO.getItem_code(),orderDetailsDTO.getQty(),orderDetailsDTO.getUnitPrice(),String.valueOf(orderDetailsDTO.getDate()));
     }
 
     public OrderDTO fromOrder(OrderEntity orderEntity){
@@ -43,7 +44,7 @@ public class Convertor {
     }
 
     public OrderEntity toOrder(OrderDTO orderDTO){
-        return new OrderEntity(orderDTO.getOrder_id(), (Date) orderDTO.getDate(),orderDTO.getCustomer_id());
+        return new OrderEntity(orderDTO.getOrder_id(), String.valueOf(orderDTO.getDate()) ,orderDTO.getCustomer_id());
     }
 
     public PaymentDTOS fromPayment(PaymentEntitys paymentEntitys){
@@ -55,11 +56,11 @@ public class Convertor {
     }
 
     public StokeDTO froStoke(StokeEntity  stokeEntity){
-        return new StokeDTO(stokeEntity.getStoke_id(),stokeEntity.getDate(),stokeEntity.getSupplyer_id());
+        return new StokeDTO(stokeEntity.getStoke_id(),String.valueOf(stokeEntity.getDate()),stokeEntity.getSupplyer_id());
     }
 
     public StokeEntity toStoke(StokeDTO stokeDTO){
-        return new StokeEntity(stokeDTO.getStoke_id(),stokeDTO.getDate(),stokeDTO.getSupplyer_id());
+        return new StokeEntity(stokeDTO.getStoke_id(),String.valueOf(stokeDTO.getDate()),stokeDTO.getSupplyer_id());
     }
 
     public StokeDetailsDTO fromStokeDetails(StokeDetailsEntity stokeDetailsEntity){

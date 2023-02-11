@@ -12,9 +12,9 @@ import java.util.List;
 public interface CustomerService extends SuperSevice {
     public CustomerDTO saveCustomer(CustomerDTO customerDTO)throws DuplicateException;
 
-    public CustomerDTO updateEmploye(CustomerDTO customerDTO)throws NotFoundException;
-
-    public void deleteEmploye(String id)throws NotFoundException, InUseException;
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO)throws NotFoundException;
+    public List<CustomerDTO> findAllCustomer();
+    public void deleteCustomer(String id)throws NotFoundException, InUseException;
     public CustomerDTO findById(String id)throws NotFoundException;
 
 }

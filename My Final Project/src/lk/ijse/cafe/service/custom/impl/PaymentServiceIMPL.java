@@ -33,6 +33,17 @@ public class PaymentServiceIMPL implements PaymentService {
         return paymentDTOS;
     }
 
+    @Override
+    public String generateNextId(String PrefId, String LsatId) {
+        if (LsatId!=null){
+            int newId=Integer.parseInt(LsatId.replace(PrefId,""))+1;
+           return String.format(PrefId+"%0000000003d",newId);
+
+        }else {
+            return PrefId+000000000;
+        }
+    }
+
 //    @Override
 //    public PaymentDTO savePayment(PaymentDTO paymentDTO) throws DuplicateException {
 //        System.out.println(paymentDTO.getId()+"utto");

@@ -8,7 +8,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import lk.ijse.cafe.model.ManagerModel;
+import lk.ijse.cafe.dao.custom.SystemUsesDAO;
+import lk.ijse.cafe.dto.SystemUsesDTO;
+
+import lk.ijse.cafe.service.ServiceFactory;
+import lk.ijse.cafe.service.ServiceTypes;
+import lk.ijse.cafe.service.custom.SystemUsesService;
+import lk.ijse.cafe.service.exception.DuplicateException;
 import lk.ijse.cafe.to.Manager;
 import lk.ijse.cafe.util.Navigation;
 import lk.ijse.cafe.util.Routs;
@@ -62,6 +68,9 @@ public class ManagerCreateAccountFormController {
     private Pattern TypePatten;
     private Pattern EmailPatten;
     private  Pattern PasswordPatten;
+    public SystemUsesDAO systemUsesDAO;
+    public SystemUsesService systemUsesService;
+
 
     public void CreateOnAction(ActionEvent actionEvent) throws IOException {
         boolean isIdMatched=IdPatten.matcher(txtId.getText()).matches();
@@ -109,36 +118,22 @@ public class ManagerCreateAccountFormController {
             txtId.requestFocus();
 
         }
-    // new Alert(Alert.AlertType.CONFIRMATION,"Account Created");
-        String id=txtId.getText();
-        String name=txtName.getText();
-        String address=txtAddress.getText();
-        int tel=Integer.parseInt(txtCont.getText());
-        String type=txtType.getText();
-        String email=txtEmail.getText();
-        String password=txtPassword.getText();
-
-        Manager manager=new Manager(id,name,address,tel,type,email,password);
+        SystemUsesDTO systemUsesDTO=new SystemUsesDTO(txtId.getText(),txtName.getText(),txtAddress.getText(),Integer.parseInt(txtCont.getText()),txtType.getText(),txtEmail.getText(),txtPassword.getText());
         try {
-            boolean isCreated= ManagerModel.save(manager);
-            if (isCreated){
-                new Alert(Alert.AlertType.INFORMATION,"Account Has Created!...");
-                 pane.getChildren().clear();
-                 Navigation.navigation(Routs.MANAGER,pane);
-            }else{
-                new Alert(Alert.AlertType.WARNING,"Some Thing Went Wrong");
+            if (systemUsesService.saveCashier(systemUsesDTO)==null){
+                new Alert(Alert.AlertType.ERROR,"fail to save").show();
+                return;
             }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.CONFIRMATION,"Account created").show();
+            txtId.clear();txtName.clear();txtAddress.clear();txtCont.clear();txtType.clear();txtEmail.clear();txtPassword.clear();
+        }catch (DuplicateException e){
+            new Alert(Alert.AlertType.ERROR,"No").show();
         }
         pane.getChildren().clear();
         Navigation.navigation(Routs.MANAGER,pane);
 
     }
-    public void initialize(){
+    public void initialize() throws SQLException, ClassNotFoundException {
         IdPatten=Pattern.compile("^([S0])[0-9]{1,}$");
         NamePatten=Pattern.compile("^[a-z0-9]{4,}$");
         AddressPatten=Pattern.compile("^[A-Za-z0-9]{1,}$");
@@ -146,11 +141,12 @@ public class ManagerCreateAccountFormController {
         TypePatten=Pattern.compile("^([manager|cashier])$");
         EmailPatten=Pattern.compile("^([a-z|0-9]{3,})[@]([a-z]{2,})\\.(com|lk)$");
         PasswordPatten=Pattern.compile("^[a-zA-Z0-9_]{8,}$");
+        this.systemUsesService= ServiceFactory.getInstance().getService(ServiceTypes.SYSTEMUSERS);
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
         pane.getChildren().clear();
         Navigation.navigation(Routs.MANAGER,pane);
-        //Navigation.navigation(Routs.MANAGER,);
+
     }
 }

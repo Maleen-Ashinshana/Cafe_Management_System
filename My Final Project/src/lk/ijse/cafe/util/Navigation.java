@@ -21,10 +21,6 @@ public class Navigation {
                 window.setTitle("Manager Login");
                 iniUI("ManagerLogingForm.fxml");
                 break;
-            case Item:
-                window.setTitle("Items Manage");
-                iniUI("ItemForm.fxml");
-                break;
             case STOKE:
                 window.setTitle("Stoke Manage");
                 iniUI("StokeForm.fxml");
@@ -32,10 +28,6 @@ public class Navigation {
             case DASHBORAD:
                 window.setTitle("Dash board");
                 iniUI("DashBordForm.fxml");
-                break;
-            case EMPLOYE:
-                window.setTitle("Employe Board");
-                iniUI("EmployeForm.fxml");
                 break;
             case PLACE_ORDER:
                 window.setTitle("Place order");
@@ -82,6 +74,12 @@ public class Navigation {
             case EMPLOY_VIEW:
                 iniUI("EmployeViewForm.fxml");
                  break;
+            case SUPPLIER:
+                iniUI("supplerForm.fxml");
+                break;
+            case STOKEITEMS:
+                iniUI("StokeItemsForm.fxml");
+                break;
             default:
                 new Alert(Alert.AlertType.ERROR,"UI Not Found!..");
         }

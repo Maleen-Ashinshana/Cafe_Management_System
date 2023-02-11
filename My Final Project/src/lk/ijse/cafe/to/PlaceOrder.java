@@ -1,5 +1,7 @@
 package lk.ijse.cafe.to;
 
+import lk.ijse.cafe.dto.CartDetailDTO;
+
 import java.util.ArrayList;
 
 public class PlaceOrder {
@@ -7,7 +9,7 @@ public class PlaceOrder {
     private String orderId;
 
     private String orderDate;
-    private ArrayList<CartDetail> orderDetails=new ArrayList<>();
+    private ArrayList<CartDetailDTO> orderDetails=new ArrayList<>();
 
     public PlaceOrder(String customerId, String orderId, String orderDate) {
         this.customerId = customerId;
@@ -15,7 +17,7 @@ public class PlaceOrder {
         this.orderDate = orderDate;
     }
 
-    public PlaceOrder(String customerId, String orderId, String orderDate, ArrayList<CartDetail> orderDetails) {
+    public PlaceOrder(String customerId, String orderId, String orderDate, ArrayList<CartDetailDTO> orderDetails) {
         this.customerId = customerId;
         this.orderId = orderId;
         this.orderDate = orderDate;
@@ -38,11 +40,11 @@ public class PlaceOrder {
         this.orderId = orderId;
     }
 
-    public ArrayList<CartDetail> getOrderDetails() {
+    public ArrayList<CartDetailDTO> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(ArrayList<CartDetail> orderDetails) {
+    public void setOrderDetails(ArrayList<CartDetailDTO> orderDetails) {
         this.orderDetails = orderDetails;
     }
 

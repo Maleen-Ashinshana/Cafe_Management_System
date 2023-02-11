@@ -11,10 +11,11 @@ import java.util.List;
 public interface ItemService extends SuperSevice {
     public ItemDTO saveItem(ItemDTO itemDTO)throws DuplicateException;
     public ItemDTO updateItem(ItemDTO itemDTO)throws NotFoundException;
-    public  void deleteItem(String code)throws  NotFoundException, InUseException;
+    //public  void deleteItem(String code)throws  NotFoundException, InUseException;
     public List<ItemDTO> findAll();
     public  ItemDTO findItemByCode(String code) throws  NotFoundException;
-    public List<ItemDTO> searchByText(String text);
+    //public List<ItemDTO> searchByText(String text);
     public ItemDTO searchItem(String text);
+    public void delete(String code)throws NotFoundException;
 
 }

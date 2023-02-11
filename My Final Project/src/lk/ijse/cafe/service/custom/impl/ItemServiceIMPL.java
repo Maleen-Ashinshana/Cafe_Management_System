@@ -1,6 +1,7 @@
 package lk.ijse.cafe.service.custom.impl;
 
 import lk.ijse.cafe.dao.custom.ItemDAO;
+import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.dao.util.DAOFactory;
 import lk.ijse.cafe.dao.util.DaoTypes;
 import lk.ijse.cafe.db.DBConnection;
@@ -17,6 +18,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ItemServiceIMPL implements ItemService {
 private  final ItemDAO itemDAO;
@@ -46,13 +48,8 @@ private final Connection connection;
     }
 
     @Override
-    public void deleteItem(String code) throws NotFoundException, InUseException {
-
-    }
-
-    @Override
     public List<ItemDTO> findAll() {
-        return null;
+        return itemDAO.findAll().stream().map(item->convertor.fromItem(item)).collect(Collectors.toList());
     }
 
     @Override
@@ -60,16 +57,20 @@ private final Connection connection;
         Optional<ItemEntity> optionalItem=itemDAO.findByPk(code);
         if (!optionalItem.isPresent())throw  new NotFoundException("Item Not Found");
         return convertor.fromItem(optionalItem.get());
-
     }
-
-    @Override
-    public List<ItemDTO> searchByText(String text) {
-        return null;
-    }
-
     @Override
     public ItemDTO searchItem(String text) {
-        return null;
+        Optional<ItemEntity> itemEntity=itemDAO.findByPk(text);
+        if (!itemEntity.isPresent())throw new NotFoundException("Item Not Found");
+        return convertor.fromItem(itemEntity.get());
+    }
+    @Override
+    public void delete(String code) throws NotFoundException {
+        if (!itemDAO.existByPk(code))throw new NotFoundException("Item Not Found");
+        try {
+            itemDAO.deleteItem(code);
+        }catch (ConstraintViolationException e){
+            throw new RuntimeException();
+        }
     }
 }

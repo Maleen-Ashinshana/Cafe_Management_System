@@ -1,6 +1,8 @@
 package lk.ijse.cafe.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,13 +15,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import lk.ijse.cafe.dto.EmployeDTO;
-import lk.ijse.cafe.entity.EmployeEntity;
-import lk.ijse.cafe.model.EmployeeModel;
+
 import lk.ijse.cafe.service.ServiceFactory;
 import lk.ijse.cafe.service.ServiceTypes;
 import lk.ijse.cafe.service.custom.EmployeService;
 import lk.ijse.cafe.service.exception.DuplicateException;
 import lk.ijse.cafe.service.exception.NotFoundException;
+import lk.ijse.cafe.tm.EmployeTM;
 import lk.ijse.cafe.to.Employee;
 import lk.ijse.cafe.util.Animations;
 import lk.ijse.cafe.views.tm.EmployeTm;
@@ -27,8 +29,10 @@ import lk.ijse.cafe.views.tm.EmployeTm;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class EmployeViewFormController {
     public AnchorPane subPane;
@@ -49,7 +53,7 @@ public class EmployeViewFormController {
     @FXML
     private AnchorPane pane;
     @FXML
-    private TableView tblEmployee;
+    private TableView<EmployeTm> tblEmployee;
     @FXML
     private TableColumn tblId;
     @FXML
@@ -73,18 +77,19 @@ public class EmployeViewFormController {
     private  Pattern gendrePattern;
     private  Pattern tyePettern;
     private Pattern salaryPattern;
-    public Button btnDelete;
-public EmployeTm  employeTm;
-public EmployeService employeService;
 
-public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundException {
-    //this.tblEmployee=tblEmployee;
-    this.employeTm=employeTm;
-    //fillAllFields(employeTm);
+    public Button btnUpdate;
+    public EmployeDTO employeDTO;
+
+    public EmployeTM employeTM;
+    public EmployeService employeService;
+
+public void init(EmployeDTO employeDTO) throws SQLException, ClassNotFoundException {
+
+    this.employeDTO=employeDTO;
     this.employeService= ServiceFactory.getInstance().getService(ServiceTypes.EMPLOYE);
+
 }
-
-
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
         Stage window=(Stage)pane.getScene().getWindow();
         window.close();
@@ -92,15 +97,15 @@ public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundExceptio
         Parent load = FXMLLoader.load(resource);
         Scene scene = new Scene(load);
         Stage stage = new Stage();
-        //stage.close();
+
         stage.setScene(scene);
         stage.show();
     }
 
     public  void initialize() throws SQLException, ClassNotFoundException {
-    this.employeService=ServiceFactory.getInstance().getService(ServiceTypes.EMPLOYE);
-    init(employeTm);
-    employeeView();
+
+        init(employeDTO);
+        employeeView();
         subPane.setVisible(false);
         Animations.fadeOut(subPane);
         idPattern=Pattern.compile("[E][0][0-9]{1,}");
@@ -111,40 +116,31 @@ public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundExceptio
         gendrePattern=Pattern.compile("(male|female)");
         tyePettern=Pattern.compile("(waiter|supperwiser|chef)");
         salaryPattern=Pattern.compile("[.0-9]");
-
-
+        this.employeService=ServiceFactory.getInstance().getService(ServiceTypes.EMPLOYE);
+       list();
+    }
+    public void list(){
+        List<EmployeTm> employeTmList=employeService.findAllEmploye().stream().map(employe->new EmployeTm(employe.getEmploye_id(), employe.getName(), employe.getAddress(), employe.getEmail(), employe.getContact_num(), employe.getGender(), employe.getType(), employe.getSalary())).collect(Collectors.toList());
+        tblEmployee.setItems(FXCollections.observableArrayList(employeTmList));
     }
 
     private void employeeView() throws SQLException, ClassNotFoundException {
         this.employeService=ServiceFactory.getInstance().getService(ServiceTypes.EMPLOYE);
-
-        tblId.setCellValueFactory(new PropertyValueFactory<>("id"));
+       // btnUpdate1.setDisable(true);
+        tblId.setCellValueFactory(new PropertyValueFactory<>("employe_id"));
         tblName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tblAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tblEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tblTel.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        tblTel.setCellValueFactory(new PropertyValueFactory<>("contact_num"));
         tblGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         tblType.setCellValueFactory(new PropertyValueFactory<>("type"));
         tblSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
     }
 
-    public void btnRealodOnActio0n(ActionEvent actionEvent) {
-        try {
-            ObservableList<Employee> employeeList= EmployeeModel.getAllEmployee();
-            tblEmployee.setItems(employeeList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void btnEditOnACtion(ActionEvent actionEvent) {
         subPane.setVisible(true);
         Animations.fadeInUp(subPane);
-
     }
-
     public void btnAddOnACtion(ActionEvent actionEvent) {
         boolean isIdMatched=idPattern.matcher(txtId.getText()).matches();
         boolean isNameMatched=namePattern.matcher(txtName.getText()).matches();
@@ -201,7 +197,7 @@ public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundExceptio
                 return;
             }
             new Alert(Alert.AlertType.CONFIRMATION,"Successfully Saved!").show();
-           // tblEmployee.getItems().add(new EmployeTm(employeDTO.getEmploye_id(),employeDTO.getName(),employeDTO.getAddress(),employeDTO.getEmail(),employeDTO.getContact_num(),employeDTO.getGender(),employeDTO.getType(),employeDTO.getSalary()));
+            tblEmployee.getItems().add(new EmployeTm(employeDTO.getEmploye_id(),employeDTO.getName(),employeDTO.getAddress(),employeDTO.getEmail(),employeDTO.getContact_num(),employeDTO.getGender(),employeDTO.getType(),employeDTO.getSalary()));
             txtId.clear();
             txtName.clear();
             txtAddress.clear();
@@ -219,31 +215,28 @@ public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundExceptio
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-//        try {
-//            boolean isDelete=EmployeeModel.deleteEmployee(txtId.getText());
-//            if (isDelete){
-//                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!...").show();
-//            }else{
-//                new Alert(Alert.AlertType.WARNING,"Some Thing Went Wrong!...");
-//            }
-//        } catch (SQLException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
 
-
-
-        Alert alert=new Alert(Alert.AlertType.WARNING,"are you sure to delete the employe", ButtonType.YES,ButtonType.NO);
+        Alert alert=new Alert(Alert.AlertType.WARNING,"are you sure to delete the employe",ButtonType.YES,ButtonType.NO);
         Optional<ButtonType> result=alert.showAndWait();
         if (result.isPresent() && result.get()==ButtonType.YES){
             try {
-                employeService.deleteEmploye(employeTm.getEmploye_id());
-                new Alert(Alert.AlertType.INFORMATION,"Employe Deleted!").show();
-                tblEmployee.getItems().removeAll(tblEmployee.getSelectionModel().getSelectedItem());;
-            btnDelete.getScene().getWindow().hide();
+                employeService.deleteEmploye(txtId.getText());
+                new Alert(Alert.AlertType.INFORMATION,"employe deleted").show();
+                tblEmployee.getItems().removeAll(tblEmployee.getSelectionModel().getSelectedItem());
+                txtId.clear();
+                txtName.clear();
+                txtAddress.clear();
+                txtEmail.clear();
+                txtTel.clear();
+                txtGender.clear();
+                txtType.clear();
+                txtSalary.clear();
+                list();
             }catch (NotFoundException e){
-                new Alert(Alert.AlertType.WARNING,"No Employe!").show();
+                new Alert(Alert.AlertType.WARNING,"No").show();
             }
         }
+
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
@@ -294,37 +287,31 @@ public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundExceptio
                 txtId.requestFocus();
             }
         }
-
-        String id=txtId.getText();
-        String name=txtName.getText();
-        String address=txtAddress.getText();
-        String email=txtEmail.getText();
-        int tel=Integer.parseInt(txtTel.getText());
-        String gender=txtGender.getText();
-        String type=txtType.getText();
-        double salary=Double.parseDouble(txtSalary.getText());
-
-        Employee employee=new Employee(id,name,address,email,tel,gender,type,salary);
-
+        EmployeDTO updateEmployee=new EmployeDTO(txtId.getText(),txtName.getText(),txtAddress.getText(),txtEmail.getText(),Integer.parseInt(txtTel.getText()),txtGender.getText(),txtType.getText(),Double.parseDouble(txtSalary.getText()));
         try {
-            boolean isUpdate=EmployeeModel.updateEmploye(employee);
-            if (isUpdate){
-                new Alert(Alert.AlertType.CONFIRMATION,"Updated!...").show();
-            }else{
-                new Alert(Alert.AlertType.WARNING,"Some Thing Went Wrong!...").show();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            employeService.updateEmploye(updateEmployee);
+            int selectedIndex=tblEmployee.getSelectionModel().getSelectedIndex();
+            tblEmployee.getItems().remove(selectedIndex+1);
+            new Alert(Alert.AlertType.INFORMATION,"update successful").show();
+            txtId.clear();
+            txtName.clear();
+            txtAddress.clear();
+            txtEmail.clear();
+            txtTel.clear();
+            txtGender.clear();
+            txtType.clear();
+            txtSalary.clear();
+            list();
+        }catch (NotFoundException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
+
     }
 
     public void btnCencleOnACtion(ActionEvent actionEvent) {
         subPane.setVisible(false);
         Animations.fadeOut(subPane);
     }
-
     public void txtIdOnACtion(ActionEvent actionEvent) {
         String ids=txtId.getText();
         EmployeDTO employeDTO=employeService.findById(ids);
@@ -342,19 +329,8 @@ public void init(EmployeTm employeTm) throws SQLException, ClassNotFoundExceptio
         txtGender.setText(employeDTO.getGender());
         txtType.setText(employeDTO.getType());
         txtSalary.setText(String.valueOf(employeDTO.getSalary()));
-
     }
-    //System.out.println(txtId.getText());
-//    private void fillAllFields(EmployeTm employeTm){
-//        System.out.println(txtId.getText());
-//    txtId.setText(employeTm.getEmploye_id());
-//    txtName.setText(employeTm.getName());
-//    txtAddress.setText(employeTm.getAddress());
-//    txtEmail.setText(employeTm.getEmail());
-//    txtTel.setText(String.valueOf(employeTm.getContact_num()));
-//    txtGender.setText(employeTm.getGender());
-//    txtType.setText(employeTm.getType());
-//    txtSalary.setText(String.valueOf(employeTm.getSalary()));
-//    }
-
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+        txtIdOnACtion(actionEvent);
+    }
 }

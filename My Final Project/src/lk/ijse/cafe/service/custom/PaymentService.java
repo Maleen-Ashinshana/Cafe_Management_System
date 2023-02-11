@@ -9,4 +9,5 @@ import lk.ijse.cafe.service.exception.DuplicateException;
 public interface PaymentService extends SuperSevice {
     //public PaymentDTO savePayment(PaymentDTO paymentDTO)throws DuplicateException;
     public PaymentDTOS savePayment(PaymentDTOS paymentDTOS) throws DuplicateException;
+    public String generateNextId(String PrefId,String LsatId);
 }

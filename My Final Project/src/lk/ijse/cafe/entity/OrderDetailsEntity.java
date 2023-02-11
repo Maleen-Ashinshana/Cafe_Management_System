@@ -7,17 +7,20 @@ public class OrderDetailsEntity implements SupperEntity{
     private String item_code;
     private int qty;
     private double unitPrice;
-    private Date date;
+    private String date;
 
     public OrderDetailsEntity() {
     }
 
-    public OrderDetailsEntity(String order_id, String item_code, int qty, double unitPrice, Date date) {
+    public OrderDetailsEntity(String order_id, String item_code, int qty, double unitPrice, String date) {
         this.order_id = order_id;
         this.item_code = item_code;
         this.qty = qty;
         this.unitPrice = unitPrice;
         this.date = date;
+    }
+
+    public OrderDetailsEntity(String orderId, java.util.Date date, String customerId) {
     }
 
     public String getOrder_id() {
@@ -52,11 +55,22 @@ public class OrderDetailsEntity implements SupperEntity{
         this.unitPrice = unitPrice;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetailsEntity{" +
+                "order_id='" + order_id + '\'' +
+                ", item_code='" + item_code + '\'' +
+                ", qty=" + qty +
+                ", unitPrice=" + unitPrice +
+                ", date=" + date +
+                '}';
     }
 }

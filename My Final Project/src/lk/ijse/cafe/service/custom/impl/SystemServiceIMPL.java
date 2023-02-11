@@ -20,7 +20,7 @@ public class SystemServiceIMPL implements SystemUsesService {
 
     public SystemServiceIMPL() throws SQLException, ClassNotFoundException {
         connection= DBConnection.getInstance().getConnection();
-        systemUsesDAO= DAOFactory.getInstance().getDAO(connection, DaoTypes.CASHIER);
+        systemUsesDAO= DAOFactory.getInstance().getDAO(connection, DaoTypes.SYSTEMUSERS);
         convertor=new Convertor();
     }
     @Override

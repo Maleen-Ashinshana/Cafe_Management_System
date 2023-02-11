@@ -5,6 +5,7 @@ import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.entity.CustomerEntity;
 import lk.ijse.cafe.entity.ItemEntity;
 import lk.ijse.cafe.entity.OrderEntity;
+import lk.ijse.cafe.service.exception.NotFoundException;
 import lk.ijse.cafe.util.CrudUtil;
 
 import java.sql.Connection;
@@ -24,7 +25,7 @@ public class OrderDAOIMPL implements OrderDAO {
     @Override
     public OrderEntity save(OrderEntity entity) throws ConstraintViolationException {
         try {
-            if (CrudUtil.execute("INSERT INTO orders(order_id,date,customer_id)VALUES (?,?,?)",
+            if (CrudUtil.execute("INSERT INTO orders(order_id,date,customerId)VALUES (?,?,?)",
                     entity.getOrder_id(),entity.getDate(),entity.getCustomer_id()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -49,17 +50,9 @@ public class OrderDAOIMPL implements OrderDAO {
     }
 
     @Override
-    public Object deleteByPk(String id) throws ConstraintViolationException {
-//        try {
-//            if (!CrudUtil.execute("DELETE FROM order WHERE order_id",id));
-//            throw new RuntimeException("Fail");
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
+    public void delete(String code) throws NotFoundException {
         try {
-            return CrudUtil.execute("Delete From order where order_id='"+id+"'");
+            CrudUtil.execute("Delete From order where order_id= '"+code+"'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -67,6 +60,26 @@ public class OrderDAOIMPL implements OrderDAO {
         }
 
     }
+
+//    @Override
+//    public OrderEntity deleteByPk(String id) throws ConstraintViolationException {
+////        try {
+////            if (!CrudUtil.execute("DELETE FROM order WHERE order_id",id));
+////            throw new RuntimeException("Fail");
+////        } catch (SQLException e) {
+////            throw new RuntimeException(e);
+////        } catch (ClassNotFoundException e) {
+////            throw new RuntimeException(e);
+////        }
+//        try {
+//            return CrudUtil.execute("Delete From order where order_id='"+id+"'");
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 
     @Override
     public List<OrderEntity> findAll() {
@@ -88,7 +101,7 @@ public class OrderDAOIMPL implements OrderDAO {
             ResultSet rst = CrudUtil.execute("SELECT * FROM order WHERE order_id=?", pk);
             if(rst.next()){
                // return Optional.of(new Book(rst.getString("isbn"), rst.getString("title"), rst.getString("author"), rst.getInt("qty")));
-              return Optional.of(new OrderEntity(rst.getString("order-id,"),rst.getDate("date"),rst.getString("customer_id")));
+              return Optional.of(new OrderEntity(rst.getString("order-id,"),rst.getString("date"),rst.getString("customer_id")));
             }
             return Optional.empty();
         } catch (SQLException e) {
@@ -118,7 +131,7 @@ public class OrderDAOIMPL implements OrderDAO {
             ResultSet rst=CrudUtil.execute("SELECT * FROM order WHERE order_id=?");
             if (rst.next()){
                // return new ItemEntity(rst.getString(1),rst.getString(2),rst.getDouble(3));
-                return new OrderEntity(rst.getString("order_id"),rst.getDate("date"),rst.getString("customer_id"));
+                return new OrderEntity(rst.getString("order_id"),rst.getString("date"),rst.getString("customer_id"));
 
             }
             return null;
@@ -179,7 +192,7 @@ public class OrderDAOIMPL implements OrderDAO {
         try {
             List<OrderEntity> orderList = new ArrayList<>();
             while (resultSet.next()){
-                OrderEntity orderEntity=new OrderEntity(resultSet.getString("order_id"),resultSet.getDate("date"),resultSet.getString("customer_id"));
+                OrderEntity orderEntity=new OrderEntity(resultSet.getString("order_id"),resultSet.getString("date"),resultSet.getString("customer_id"));
                 orderList.add(orderEntity);
             }
             return orderList;
@@ -187,4 +200,5 @@ public class OrderDAOIMPL implements OrderDAO {
             throw new RuntimeException(e);
         }
     }
+
 }

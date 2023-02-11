@@ -38,8 +38,6 @@ public class ManagerDashBoardFomController implements Initializable {
     }
 
     public void ItemsOnAction(ActionEvent actionEvent) throws IOException {
-        //Navigation.navigation(Routs.Item,pane);
-        //Navigation.navigation(Routs.MANAGER,pane);
         Navigation.navigation(Routs.LIST_ITEM,pane);
     }
 
@@ -117,5 +115,13 @@ public class ManagerDashBoardFomController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void btnSupplierOnAction(ActionEvent actionEvent) throws IOException {
+   Navigation.navigation(Routs.SUPPLIER,pane);
+    }
+
+    public void btnStokeItemOnAction(ActionEvent actionEvent) throws IOException {
+     Navigation.navigation(Routs.STOKEITEMS,pane);
     }
 }

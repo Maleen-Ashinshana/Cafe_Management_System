@@ -12,7 +12,8 @@ public class OrderDetailsDAOIMPL implements OrderDetailsDAO {
 private Connection connection;
 
     public OrderDetailsDAOIMPL(Connection connection) {
-        this.connection = connection;
+
+       this .connection = connection;
     }
 
     @Override

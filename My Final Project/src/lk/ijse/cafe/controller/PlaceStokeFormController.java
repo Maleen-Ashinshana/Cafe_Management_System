@@ -11,11 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.cafe.dto.StokeDTO;
+import lk.ijse.cafe.dto.StokeDetailsDTO;
 import lk.ijse.cafe.dto.StokeItemsDTO;
 import lk.ijse.cafe.dto.SupployerDTO;
-import lk.ijse.cafe.model.PlaceStockModel;
-import lk.ijse.cafe.model.StockModel;
+
 import lk.ijse.cafe.model.StokeItemModel;
+
 import lk.ijse.cafe.model.SupplyeerModel;
 import lk.ijse.cafe.service.ServiceFactory;
 import lk.ijse.cafe.service.ServiceTypes;
@@ -24,17 +25,16 @@ import lk.ijse.cafe.service.custom.StokeService;
 import lk.ijse.cafe.service.custom.SupployerService;
 import lk.ijse.cafe.service.exception.DuplicateException;
 import lk.ijse.cafe.tm.PlaceStockTM;
-import lk.ijse.cafe.to.PlaceStock;
-import lk.ijse.cafe.to.StockItems;
-import lk.ijse.cafe.to.StockCartDeteils;
-import lk.ijse.cafe.to.Supplyer;
 import lk.ijse.cafe.util.Animations;
+import lk.ijse.cafe.util.CrudUtil;
+import lk.ijse.cafe.views.tm.StokeItemsTm;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class PlaceStokeFormController {
     @FXML
@@ -77,9 +77,10 @@ public class PlaceStokeFormController {
     private TableColumn tblQty;
     public SupployerService supployerService;
     public StokeService stokeService;
-    public StokeItemService itemService;
+    public StokeItemService stokeitemService;
+    //public StokeItemService itemService;
 
-    private ObservableList<PlaceStockTM> obList=FXCollections.observableArrayList();
+    private ObservableList<StokeItemsTm> obList=FXCollections.observableArrayList();
 
      public  void initialize() throws SQLException, ClassNotFoundException {
          loadStockDate();
@@ -90,49 +91,75 @@ public class PlaceStokeFormController {
          SupplierPane.setVisible(false);
          Animations.fadeOut(SupplierPane);
          this.supployerService= ServiceFactory.getInstance().getService(ServiceTypes.SUPPLOYER);
+         this.stokeitemService=ServiceFactory.getInstance().getService(ServiceTypes.STOKEITEMS);
+         this.stokeService=ServiceFactory.getInstance().getService(ServiceTypes.STOKE);
 
      }
+    public static String getNextId() throws SQLException, ClassNotFoundException {
+        ResultSet result= CrudUtil.execute("SELECT stok_id FROM stok ORDER BY stok_id DESC LIMIT 1");
+        if (result.next()){
+            return generateNextId("E",result.getString(1));
+
+        }
+        return generateNextId("E",null);
+
+    }
+    private static String generateNextId(String PrefId,String LsatId){
+        if (LsatId!=null){
+            int newId=Integer.parseInt(LsatId.replace(PrefId,""))+1;
+            return String.format(PrefId+"%03d",newId);
+
+        }else {
+            return PrefId+000;
+        }
+    }
    private void loadNextOrderId(){
        try {
-           String id= StockModel.getNextId();
+           String id= getNextId();
            lblId.setText(id);
        } catch (SQLException | ClassNotFoundException e) {
            throw new RuntimeException(e);
        }
    }
-   private  void loadSupployeerId(){
+   private  void loadSupployeerId() throws SQLException, ClassNotFoundException {
        ObservableList<String> observableList= FXCollections.observableArrayList();
-       try {
-           ArrayList<String> supplyeer= SupplyeerModel.loadSupplyerId();
-           for (String id:supplyeer) {
-               observableList.add(id);
-           }
-           comSupplerId.setItems(observableList);
-       } catch (SQLException | ClassNotFoundException e) {
-           throw new RuntimeException(e);
+       //System.out.println(comSupplerId.getSelectionModel().getSelectedIndex()+"***************");
+       ArrayList<String> supplyeer= SupplyeerModel.loadSupplyerId();
+       for (String id:supplyeer) {
+           observableList.add(id);
        }
+       comSupplerId.setItems(observableList);
    }
     public void btnPlaceStokeOnAction(ActionEvent actionEvent) {
         String stockId=lblId.getText();
+        System.out.println(stockId);
         String SupplierId=String.valueOf(comSupplerId.getValue());
 
-         ArrayList<StockCartDeteils>stockCartDeteils=new ArrayList<>();
+         ArrayList<StokeDetailsDTO> stokeItems=new ArrayList<>();
+        for (StokeItemsTm itemsTm : obList) {
+            stokeItems.add(new StokeDetailsDTO(stockId,itemsTm.getId(), itemsTm.getUnitPrice(), itemsTm.getQty()));
 
-         for (int i=0;i<tblOrderChart.getItems().size();i++){
-             PlaceStockTM tm=obList.get(i);
-             stockCartDeteils.add(new StockCartDeteils(stockId,tm.getId(),tm.getDescription(),tm.getUnitPrice(),tm.getQty(),lblDate.getText()));
-         }
-        PlaceStock placeStock=new PlaceStock(SupplierId,stockId,stockCartDeteils);
+        }
+
+//         for (int i=0;i<tblOrderChart.getItems().size();i++){
+//             StokeItemsTm tm=obList.get(i);
+//             stockCartDeteils.add(new StokeDetailsDTO(comCode.getSelectionModel().getSelectedItem().toString(),tm.getId(),tm.getUnitPrice(),tm.getQty()));
+//             System.out.println(stockId);
+//         }
+        //StokeDTO placeStock=new StokeDTO(comCode.getSelectionModel().getSelectedItem().toString(),lblDate.getText(),String.valueOf(comSupplerId.getSelectionModel().getSelectedItem()));
+        StokeDTO placeStock=new StokeDTO(lblId.getText(),lblDate.getText(),String.valueOf(comSupplerId.getSelectionModel().getSelectedItem()));
         try {
-            boolean isPlaced= PlaceStockModel.placeStock(placeStock);
+            System.out.println(placeStock.getStoke_id());
+            boolean isPlaced= stokeService.placeStock(placeStock,stokeItems);
             if (isPlaced) {
             //System.out.println("Place:"+placeStock);
-                new Alert(Alert.AlertType.ERROR,"Stock Not Placed!...").show();
 
-            }else{
                 obList.clear();
                 loadNextOrderId();
                 new Alert(Alert.AlertType.CONFIRMATION,"Stock Placed!...").show();
+
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Stock Not Placed!...").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -142,7 +169,7 @@ public class PlaceStokeFormController {
     }
 
     public void btnAddToChartOnAction(ActionEvent actionEvent) {
-         String id=String.valueOf(comCode.getValue());
+         String id=comCode.getSelectionModel().getSelectedItem().toString();
          int qty=Integer.parseInt(txtQty.getText());
          String desc =lblDescription.getText();
          double unitPrice=Double.parseDouble(lblUnitPrice.getText());
@@ -159,7 +186,7 @@ public class PlaceStokeFormController {
                  }
              }
          }
-         obList.add(new PlaceStockTM(id,desc,unitPrice,qty));
+         obList.add(new StokeItemsTm(id,desc,unitPrice,qty));
          tblOrderChart.setItems(obList);
     }
     private  void loadStockDate(){
@@ -168,18 +195,14 @@ public class PlaceStokeFormController {
 
     @FXML
     private void supplyeerIdOnAction(ActionEvent actionEvent) {
-        String id=String.valueOf(comSupplerId.getValue());
-        try {
-            Supplyer supplyer=SupplyeerModel.search(id);
-            fillSupplyeerFiels(supplyer);
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        SupployerDTO supployerDTO=supployerService.findByid(String.valueOf(comSupplerId.getValue()));
+
+        if (supployerDTO!=null){
+            fillSupplyeerFiels(supployerDTO);
         }
     }
-    private  void fillSupplyeerFiels(Supplyer supplyer){
+    private  void fillSupplyeerFiels(SupployerDTO supplyer){
          lblSupplerName.setText(supplyer.getName());
     }
     private void LoadId(){
@@ -197,16 +220,8 @@ public class PlaceStokeFormController {
 
     @FXML
     private void stockCodeOnAction(ActionEvent actionEvent) {
-//        String code=String.valueOf(comCode.getValue());
-//        try {
-//            StockItems stock= StockModel.search(code);
-//            fillStockFeilds(stock);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-        StokeItemsDTO  stokeItemsDTO=itemService.searchStokeItem(txtId.getText());
+         StokeItemsDTO stokeItemsDTO=stokeitemService.searchStokeItem(String.valueOf(comCode.getValue()));
+        //StokeItemsDTO  stokeItemsDTO=itemService.searchStokeItem(String.valueOf(comCode.getValue()));
         if (stokeItemsDTO!=null){
             fillStockFeilds(stokeItemsDTO);
         }
@@ -246,6 +261,10 @@ public class PlaceStokeFormController {
             new Alert(Alert.AlertType.ERROR,"Supployer Already Saved!").show();
             txtId.selectAll();
             txtId.requestFocus();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

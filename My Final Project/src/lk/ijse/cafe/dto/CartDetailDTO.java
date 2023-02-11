@@ -1,6 +1,6 @@
-package lk.ijse.cafe.to;
+package lk.ijse.cafe.dto;
 
-public class CartDetail {
+public class CartDetailDTO {
     private String orderId;
     private String code;
     private int qty;
@@ -8,10 +8,10 @@ public class CartDetail {
     private double unitPrice;
     private String date;
 
-    public CartDetail() {
+    public CartDetailDTO() {
     }
 
-    public CartDetail(String orderId, String code, int qty, String description, double unitPrice, String date) {
+    public CartDetailDTO(String orderId, String code, int qty, String description, double unitPrice, String date) {
         this.orderId = orderId;
         this.code = code;
         this.qty = qty;

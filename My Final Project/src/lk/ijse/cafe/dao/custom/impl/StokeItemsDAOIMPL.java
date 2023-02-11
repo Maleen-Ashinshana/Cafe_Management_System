@@ -3,6 +3,8 @@ package lk.ijse.cafe.dao.custom.impl;
 import lk.ijse.cafe.dao.custom.StokeItemsDAO;
 import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.entity.StokeItemsEntity;
+import lk.ijse.cafe.service.exception.NotFoundException;
+import lk.ijse.cafe.to.StockItems;
 import lk.ijse.cafe.util.CrudUtil;
 
 import java.sql.Connection;
@@ -36,7 +38,7 @@ public class StokeItemsDAOIMPL implements StokeItemsDAO {
     @Override
     public StokeItemsEntity update(StokeItemsEntity entity) throws ConstraintViolationException {
         try {
-            if (CrudUtil.execute("UPDATE stoke_items SET description=?,unitPrice=?,qty WHERE id=?",
+            if (CrudUtil.execute("UPDATE stoke_items SET description=?,unitPrice=?,qty=? WHERE id=?",
                     entity.getDescription(),entity.getUnitPrice(),entity.getQty(),entity.getId()));
             return entity;
         } catch (SQLException e) {
@@ -48,16 +50,28 @@ public class StokeItemsDAOIMPL implements StokeItemsDAO {
     }
 
     @Override
-    public Object deleteByPk(String id) throws ConstraintViolationException, SQLException, ClassNotFoundException {
+    public void delete(String code) throws NotFoundException {
         try {
-            return CrudUtil.execute("Delete From stoke_items where id='"+id+"'");
+            CrudUtil.execute("Delete From stoke_items where id= '"+code+"'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+//    @Override
+//    public StokeItemsEntity deleteByPk(String id) throws ConstraintViolationException, SQLException, ClassNotFoundException {
+////        try {
+////            return CrudUtil.execute("Delete From stoke_items where id='"+id+"'");
+////        } catch (SQLException e) {
+////            throw new RuntimeException(e);
+////        } catch (ClassNotFoundException e) {
+////            throw new RuntimeException(e);
+////        }
+//        return null;
+//
+//    }
 
     @Override
     public List<StokeItemsEntity> findAll() {
@@ -159,6 +173,20 @@ public class StokeItemsDAOIMPL implements StokeItemsDAO {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public boolean updateQty(StokeItemsEntity stockItems) {
+        String sql="UPDATE stoke_items SET qty = qty + ? WHERE id = ?";
+        try {
+            System.out.println(stockItems.getDescription()+"--------");
+             return CrudUtil.execute(sql, stockItems.getQty(), stockItems.getDescription());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
 

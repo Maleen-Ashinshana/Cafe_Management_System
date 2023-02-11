@@ -59,16 +59,16 @@ public class StokeItemModel {
 
     }
 
-    public static boolean updateQty(ArrayList<StockCartDeteils>stockCartDeteils) throws SQLException, ClassNotFoundException {
-        for (StockCartDeteils stok:stockCartDeteils) {
-            if (!updateQty(new StockItems(stok.getCode(),stok.getDescription(),stok.getUnitPrice(),stok.getQty()))){
-                return false;
-
-            }
-        }
-        return true;
-
-    }
+//    public static boolean updateQty(ArrayList<StockCartDeteils>stockCartDeteils) throws SQLException, ClassNotFoundException {
+//        for (StockCartDeteils stok:stockCartDeteils) {
+//            if (!updateQty(new StockItems(stok.getCode(),stok.getDescription(),stok.getUnitPrice(),stok.getQty()))){
+//                return false;
+//
+//            }
+//        }
+//        return true;
+//
+//    }
     private static  boolean updateQty(StockItems stockItems) throws SQLException, ClassNotFoundException {
         String sql="UPDATE stoke_items SET qty = qty - ? WHERE id = ?";
         return  CrudUtil.execute(sql,stockItems.getQty(),stockItems.getId());

@@ -4,6 +4,7 @@ import lk.ijse.cafe.dao.custom.CustomerDAO;
 import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.entity.CustomerEntity;
 import lk.ijse.cafe.entity.ItemEntity;
+import lk.ijse.cafe.service.exception.NotFoundException;
 import lk.ijse.cafe.util.CrudUtil;
 
 import java.sql.Connection;
@@ -49,21 +50,22 @@ public class CustomerDAOIMPL implements CustomerDAO {
     }
 
     @Override
-    public Object deleteByPk(String id) throws ConstraintViolationException, SQLException, ClassNotFoundException {
-        //return CrudUtil.execute("Delete From items where item_code= '"+id+"'");
-//        try {
-//            if(!CrudUtil.execute("DELETE FROM customer WHERE customer_id=?",id)) throw new SQLException("Failed to delete the book");
-//        } catch (SQLException e) {
-//            throw new ConstraintViolationException(e);
-//        }
-        return CrudUtil.execute("Delete From customer where customer='"+id+"'");
+    public void delete(String code) throws NotFoundException {
+        try {
+            CrudUtil.execute("Delete From customer where customer_id= '"+code+"'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
 
     @Override
     public List<CustomerEntity> findAll() {
         try {
-            ResultSet rst=CrudUtil.execute("SELECT * FROM Book");
+            ResultSet rst=CrudUtil.execute("SELECT * FROM customer");
             return getCustomerList(rst);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -117,10 +119,6 @@ public class CustomerDAOIMPL implements CustomerDAO {
         }
     }
 
-//    @Override
-//    public CustomerEntity search(CustomerEntity entity) throws ConstraintViolationException {
-//        return null;
-//    }
 
     @Override
     public long count() {

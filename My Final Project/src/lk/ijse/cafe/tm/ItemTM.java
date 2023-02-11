@@ -1,10 +1,10 @@
-package lk.ijse.cafe.tm;
-
-import lk.ijse.cafe.dto.ItemDTO;
-import lk.ijse.cafe.entity.ItemEntity;
-import lk.ijse.cafe.to.Item;
-
-public class ItemTM extends Item {
+//package lk.ijse.cafe.tm;
+//
+//import lk.ijse.cafe.dto.ItemDTO;
+//import lk.ijse.cafe.entity.ItemEntity;
+//import lk.ijse.cafe.to.Item;
+//
+//public class ItemTM extends Item {
 //    private String code;
 //    private String description;
 //    private double unit_price;
@@ -50,4 +50,4 @@ public class ItemTM extends Item {
 //                ", unit_price=" + unit_price +
 //                '}';
 //    }
-}
+//}

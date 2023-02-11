@@ -2,8 +2,8 @@ package lk.ijse.cafe.dao.custom.impl;
 
 import lk.ijse.cafe.dao.custom.SupployerDAO;
 import lk.ijse.cafe.dao.exception.ConstraintViolationException;
-import lk.ijse.cafe.entity.OrderEntity;
 import lk.ijse.cafe.entity.SupployerEntity;
+import lk.ijse.cafe.service.exception.NotFoundException;
 import lk.ijse.cafe.util.CrudUtil;
 
 import java.sql.Connection;
@@ -37,7 +37,7 @@ public class SupployeDAOIMPL implements SupployerDAO {
     @Override
     public SupployerEntity update(SupployerEntity entity) throws ConstraintViolationException {
         try {
-            if (CrudUtil.execute("UPDATE order SET name=?,address=? WHERE supplyer_id=?",
+            if (CrudUtil.execute("UPDATE supplyer SET name=?,address=? WHERE supplyer_id=?",
                     entity.getName(),entity.getAddress(),entity.getSupplyer_id()));
             return entity;
         } catch (SQLException e) {
@@ -49,15 +49,14 @@ public class SupployeDAOIMPL implements SupployerDAO {
     }
 
     @Override
-    public Object deleteByPk(String id) throws ConstraintViolationException, SQLException, ClassNotFoundException {
+    public void delete(String code) throws NotFoundException {
         try {
-            return CrudUtil.execute("Delete From supplyer where supplyer_id='"+id+"'");
+            CrudUtil.execute("Delete From supplyer where supplyer_id= '"+code+"'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
@@ -141,5 +140,17 @@ public class SupployeDAOIMPL implements SupployerDAO {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public  ArrayList<String> loadSupplyerId() throws SQLException, ClassNotFoundException {
+        String sql="SELECT supplyer_id FROM supplyer";
+        ResultSet result= CrudUtil.execute(sql);
+
+        ArrayList<String> idList=new ArrayList<>();
+        while ((result.next())){
+            idList.add(result.getString(1));
+
+        }
+        return idList;
     }
 }

@@ -1,6 +1,7 @@
 package lk.ijse.cafe.service.custom.impl;
 
 import lk.ijse.cafe.dao.custom.EmployeDAO;
+import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.dao.util.DAOFactory;
 import lk.ijse.cafe.dao.util.DaoTypes;
 import lk.ijse.cafe.db.DBConnection;
@@ -33,8 +34,14 @@ public class EmployeServiceIMPL implements EmployeService {
     public EmployeDTO saveEmploye(EmployeDTO employeDTO) throws DuplicateException {
         if (employeDAO.existByPk(employeDTO.getEmploye_id()))throw new DuplicateException("Employe Already Saved");
         employeDAO.save(convertor.toEmploy(employeDTO));
-
         return employeDTO;
+    }
+
+    @Override
+    public EmployeDTO searchEmploye(String text) {
+        Optional<EmployeEntity> employeEntity=employeDAO.findByPk(text);
+        if (!employeEntity.isPresent())throw new NotFoundException("Employe Not Found");
+        return convertor.fromEmploy(employeEntity.get());
     }
 
     @Override
@@ -46,15 +53,12 @@ public class EmployeServiceIMPL implements EmployeService {
 
     @Override
     public void deleteEmploye(String id) throws NotFoundException, InUseException {
-        if (!employeDAO.existByPk(id))throw  new NotFoundException("Employe Not Found!");
-        try {
-            employeDAO.deleteByPk(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+      if (!employeDAO.existByPk(id)) throw new NotFoundException("Employe Not Found");
+          try {
+              employeDAO.delete(id);
+             }catch (ConstraintViolationException e){
+                throw new RuntimeException();
+             }
     }
 
     @Override
@@ -69,6 +73,4 @@ public class EmployeServiceIMPL implements EmployeService {
 
         return convertor.fromEmploy(optionalEmploye.get());
     }
-
-
 }

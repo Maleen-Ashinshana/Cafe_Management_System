@@ -72,14 +72,6 @@ public class CachierLoginController {
             txtName.setFocusColor(Paint.valueOf("Red"));
             txtName.requestFocus();
         }
-//        Stage window=(Stage)pane.getScene().getWindow();
-//                window.close();
-//                URL resource = getClass().getResource("/lk/ijse/cafe/view/CashierDachBoard.fxml");
-//                Parent load = FXMLLoader.load(resource);
-//                Scene scene = new Scene(load);
-//                Stage stage = new Stage();
-//                stage.setScene(scene);
-//                stage.show();
     }
 
     public void btnCreateOnAction(ActionEvent actionEvent) throws IOException {

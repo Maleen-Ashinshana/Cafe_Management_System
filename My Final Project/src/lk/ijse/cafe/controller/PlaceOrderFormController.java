@@ -12,27 +12,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.cafe.dao.custom.OrderDAO;
+import lk.ijse.cafe.dao.custom.PaymentDAO;
 import lk.ijse.cafe.dto.*;
 import lk.ijse.cafe.model.*;
 import lk.ijse.cafe.service.ServiceFactory;
 import lk.ijse.cafe.service.ServiceTypes;
-import lk.ijse.cafe.service.custom.CustomerService;
-import lk.ijse.cafe.service.custom.OrderDetailsService;
-import lk.ijse.cafe.service.custom.OrderService;
-import lk.ijse.cafe.service.custom.PaymentService;
+import lk.ijse.cafe.service.custom.*;
 import lk.ijse.cafe.service.exception.DuplicateException;
 import lk.ijse.cafe.tm.PlaceOrderTM;
-import lk.ijse.cafe.to.*;
 import lk.ijse.cafe.util.Animations;
+import lk.ijse.cafe.util.CrudUtil;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import rex.utils.S;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +39,7 @@ import java.util.HashMap;
 public class PlaceOrderFormController {
 
     public Label lblPayOrderId;
+    public JFXButton btnCustomerDelete;
     @FXML
     private Label lblPayCustomerId;
     @FXML
@@ -111,9 +110,14 @@ public class PlaceOrderFormController {
     public PaymentService paymentService;
     public OrderDetailsService orderDetailsService;
     public OrderService orderService;
+    public PaymentDAO paymentDAO;
+    public ItemService itemService;
+    public OrderDAO orderDAO;
+
 
     public  void initialize() throws SQLException, ClassNotFoundException {
         loadNextOrderId();
+        loadPayId();
         //loadNextCustomerId();
         loadItemCode();
         loadOrderDate();
@@ -126,30 +130,60 @@ public class PlaceOrderFormController {
         loadPeyMentId();
         this.customerService= ServiceFactory.getInstance().getService(ServiceTypes.CUSTOMER);
         this.paymentService=ServiceFactory.getInstance().getService(ServiceTypes.PAYMENT);
+        this.itemService=ServiceFactory.getInstance().getService(ServiceTypes.ITEM);
+        this.orderService=ServiceFactory.getInstance().getService(ServiceTypes.ORDER);
         //loadpayCustomerId();
     }
 
     private void loadPeyMentId() {
-        try {
-            String payMentId=PAyMentModel.getNextPayMentId();
+                try {
+            String payMentId=getNextPayMentId();
             lblPayMeantId.setText(payMentId);
         } catch (SQLException e) {
-
-
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }
+
+    }
+    public void loadPayId(/*PaymentDTOS paymentDTOS*/){
+       //PaymentDTOS paymentDTOS1=paymentService.generateNextId("P001","P100");
+//        try {
+//        }
+//        String id= paymentService.generateNextId("0",null);/*.generateNextId("000000000","999999999");*/
+//        lblPayMeantId.setText(id);
+//        String id=paymentDAO.generateNextId("0", null);
+//        lblPayMeantId.setText(id);
+    }
+    public static String getNextOrderId() throws SQLException, ClassNotFoundException {
+        ResultSet result= CrudUtil.execute("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
+        if (result.next()){
+            return generateNextOrderId("O",result.getString(1));
+
+        }
+        return generateNextOrderId("O",null);
+    }
+    private static String  generateNextOrderId(String PrefId,String LsatId) {
+
+        if (LsatId!=null){
+            int newId=Integer.parseInt(LsatId.replace(PrefId,""))+1;
+            return String.format(PrefId+"%03d",newId);
+
+        }else {
+            return PrefId+000;
         }
     }
 
     private void loadNextOrderId(){
 
         try {
-            String orderId= OrderModel.getNextOrderId();
+            String orderId= getNextOrderId();
             lblOrderId.setText(orderId);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
     }
+
 //    private void loadNextCustomerId(){
 //        try {
 //            String customerId=PlaceOrderModel.getNextCustomerId();
@@ -186,15 +220,28 @@ public class PlaceOrderFormController {
             throw new RuntimeException(e);
         }
     }
+    public static String getNextPayMentId() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet= CrudUtil.execute("SELECT id FROM payment ORDER BY id DESC LIMIT 1");
+        if (resultSet.next()){
+            return genarateNextPeymentId("P",resultSet.getString(1));
+        }
+        return genarateNextPeymentId("P",null);
+    }
+    private static String genarateNextPeymentId(String PrefId,String LsatId){
+        if (LsatId!=null){
+            int newId=Integer.parseInt(LsatId.replace(PrefId,""))+1;
+            return String.format(PrefId+"%03d",newId);
+
+        }else {
+            return PrefId+000;
+        }
+    }
     private void setCellValueFactory(){
         colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-       // colAction.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
-
-
     }
     public void btnAddToChartOnAction(ActionEvent actionEvent) {
         String code=String.valueOf(cmbItemCode.getValue());
@@ -202,7 +249,6 @@ public class PlaceOrderFormController {
         String desc=lblDescription.getText();
         double unitPrice=Double.parseDouble(lblUnitPrice.getText());
         double total=unitPrice*qty;
-        //Button btnDelete=new Button("Delete");
         Button btnDelete=new Button("Delete");
 
         txtQty.setText("");
@@ -233,7 +279,6 @@ public class PlaceOrderFormController {
     private void setTotal() {
         double total=0.0;
         for (PlaceOrderTM tm:obList) {
-            //total=total+
             total+=tm.getTotal();
         }
         lblTotal.setText(String.valueOf(total));
@@ -248,16 +293,20 @@ public class PlaceOrderFormController {
         String date=lblOrderDate.getText();//String.valueOf(lblOrderDate.getText());
         double netTotal=0.0;
 
-        ArrayList<CartDetail> cartDetails=new ArrayList<>();
+        ArrayList<OrderDetailsDTO> orderDetailsDTOS=new ArrayList<>();
 
         for (int i=0;i<lblOrderChart.getItems().size();i++){
             PlaceOrderTM tm=obList.get(i);
-            cartDetails.add(new CartDetail(lblOrderId.getText(),tm.getCode(),tm.getQty(),tm.getDescription() ,tm.getUnitPrice(), lblOrderDate.getText()));
+            orderDetailsDTOS.add(new OrderDetailsDTO(lblOrderId.getText(),tm.getCode(),tm.getQty(),tm.getUnitPrice(), lblOrderDate.getText()));
             netTotal+=tm.getTotal();
+            System.out.println(tm.getCode());
         }
-        PlaceOrder placeOrder = new PlaceOrder(customerId, lblOrderId.getText(),date);
+        //PlaceOrder placeOrder = new PlaceOrder(customerId, lblOrderId.getText(),date);
         try {
-            boolean isPlaced=PlaceOrderModel.placeOrder(lblOrderId.getText(),lblOrderDate.getText(),customerId,cartDetails);
+            for (OrderDetailsDTO orderDetailsDTO : orderDetailsDTOS) {
+                System.out.println(orderDetailsDTO.getItem_code());
+            }
+            boolean isPlaced=orderService.placeOrder(lblOrderId.getText(),lblOrderDate.getText(),customerId,orderDetailsDTOS);
             Object selectedItem = comCustomerId.getSelectionModel().getSelectedItem();
             lblPayCustomerId.setText((String) selectedItem);
             lblOrderId.getText();
@@ -277,31 +326,34 @@ public class PlaceOrderFormController {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        //OrderDTO orderDTO=new OrderDTO(tx)
-//        OrderDTO orderDTO=new OrderDTO(lblPayOrderId.getText(),lblOrderDate.getText(),lblPayCustomerId.getText());
-//        OrderDetailsDTO orderDetailsDTO=new OrderDetailsDTO(lblOrderId.getText(),tx)
-//        try {
-//            if (orderService.saveOrder(orderDTO),orderDetailsService.saveOrderDetails()==null){
-//                new Alert(Alert.AlertType.ERROR,"Fail To Save").show();
-//                return;
-//            }
+
+
+
+//        OrderDTO orderDTO=new OrderDTO(lblOrderId.getText(),lblOrderDate.getText(),lblPayCustomerId.getText());
+//        double netTotal=0.0;
+//        ArrayList<OrderDetailsDTO> orderDetailsDTOS=new ArrayList<>();
+//        for (int i=0;i<lblOrderChart.getItems().size();i++) {
+//            PlaceOrderTM tm = obList.get(i);
+//            orderDetailsDTOS.add(new OrderDetailsDTO(lblOrderId.getText(), tm.getCode(), tm.getQty(), tm.getUnitPrice(), lblOrderDate.getText()));
+//            netTotal += tm.getTotal();
 //        }
+//        PlaceOrderDTO  placeOrderDTO=new PlaceOrderDTO(orderDTO.getCustomer_id(),orderDTO.getOrder_id(),orderDTO.getDate());
+//        try {
+//
+//        }
+
 
     }
     @FXML
     private void cmbCodeOncAction(ActionEvent actionEvent) {
-        String code=String.valueOf(cmbItemCode.getValue());
-        try {
-            Item item=ItemModel.searchItem(code);
-            fillItemFields(item);
-            txtQty.requestFocus();
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        ItemDTO itemDTO=itemService.findItemByCode(String.valueOf(cmbItemCode.getValue()));
+        if (itemDTO!=null){
+            fillItemFields(itemDTO);
         }
     }
-    private void fillItemFields(Item item){
+    private void fillItemFields(ItemDTO item){
         lblDescription.setText(item.getDescription());
-        lblUnitPrice.setText(String.valueOf(item.getUnitPrice()));
+        lblUnitPrice.setText(String.valueOf(item.getUnit_price()));
 
     }
 
@@ -318,29 +370,30 @@ public class PlaceOrderFormController {
 
     @FXML
     private void btnAddOnAction(ActionEvent actionEvent) throws IOException {
-
         customerPane.setVisible(true);
         Animations.fadeInUp(customerPane);
-
-
 
     }
 
     @FXML
     private void cmbCustomerIdOnAction(ActionEvent actionEvent) {
-        String id=String.valueOf(comCustomerId.getValue());
-        try {
-            Customer customer=CustomerModel.searchCustomer(id);
-            fillCustomerName(customer);
-            //loadCustomerId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+//        String id=String.valueOf(comCustomerId.getValue());
+//        try {
+//            Customer customer=CustomerModel.searchCustomer(id);
+//            fillCustomerName(customer);
+//            //loadCustomerId();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+        CustomerDTO customerDTO=customerService.findById(String.valueOf(comCustomerId.getValue()));
+        if (customerDTO!=null){
+            fillCustomerName(customerDTO);
         }
 
     }
-    private void fillCustomerName(Customer customer){
+    private void fillCustomerName(CustomerDTO customer){
 
         lblCustomerName.setText(customer.getName());
         lblPeymentCustomerName.setText(customer.getName());
@@ -414,28 +467,6 @@ public class PlaceOrderFormController {
     @FXML
     private void btnPayOnAction(ActionEvent actionEvent) {
         loadPeyMentId();
-//        String id = lblPayMeantId.getText();
-//        String date = lblPeyMeantDate.getText();
-//        double price = Double.parseDouble(lblPeyMeantTotal.getText());
-//        //String cusId=cmbPeyMentCustomerId.getSelectionModel().selectedItemProperty().addListener();
-//        String cusId = lblPayCustomerId.getText();
-//        String orderId = lblPayOrderId.getText();
-//        String cusName = lblPeymentCustomerName.getText();
-//        double amount=Double.parseDouble(txtPeyMeantAmount.getText());
-//        double remain=Double.parseDouble(txtPeyMantReaming.getText());
-
-//        Payment payment = new Payment(id, date, price, cusId, orderId, cusName,amount,remain);
-//        System.out.println("paiy Id:" + id);
-//
-//        try {
-//            boolean isAdded = PAyMentModel.save(payment);
-//            if (isAdded) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Payment Success!...").show();
-//                //obList.clear();
-//            } else {
-//                new Alert(Alert.AlertType.WARNING, "Some thing went wrong!...").show();
-//            }
-
         PaymentDTOS paymentDTOS= new PaymentDTOS(lblPayMeantId.getText(),lblPeyMeantDate.getText(),Double.parseDouble(lblPeyMeantTotal.getText()),lblPayOrderId.getText(),lblPayCustomerId.getText(),lblPeymentCustomerName.getText());
 
         System.out.println(lblPayMeantId.getText());
@@ -481,16 +512,16 @@ public class PlaceOrderFormController {
 
     @FXML
     private void cmbPeymenyCustomerIDOnAction(ActionEvent actionEvent) {
-        String id=String.valueOf(cmbPeyMentCustomerId.getValue());
-       // PayMent payMent=PAyMentModel.search();
-        try {
-            Customer customer=CustomerModel.searchCustomer(id);
-            fillCustomerName(customer);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+//        String id=String.valueOf(cmbPeyMentCustomerId.getValue());
+//       // PayMent payMent=PAyMentModel.search();
+//        try {
+//            Customer customer=CustomerModel.searchCustomer(id);
+//            fillCustomerName(customer);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
     }
     @FXML
     private void txtAmountOnAction(ActionEvent actionEvent) {

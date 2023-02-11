@@ -22,6 +22,17 @@ public class PaymentDTO {
         this.price = price;
     }
 
+    public PaymentDTO(Date date, double price, String customer_id, String customer_name, String order_id, double total, double amount, double reaming) {
+        this.date = date;
+        this.price = price;
+        this.customer_id = customer_id;
+        this.customer_name = customer_name;
+        this.order_id = order_id;
+        this.total = total;
+        this.amount = amount;
+        this.reaming = reaming;
+    }
+
     public PaymentDTO(String id, Date date, double price, String customer_id, String customer_name, String order_id) {
         this.id = id;
         this.date = date;

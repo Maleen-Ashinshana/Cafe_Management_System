@@ -86,55 +86,14 @@ public class ManagerLogingFormController extends Component {
 
     @FXML
     private void createAccountOnAction(ActionEvent actionEvent) throws IOException {
-
-//        URL resource = getClass().getResource("/lk/ijse/cafe/view/ManagerCreateAccountForm.fxml");
-//        Parent load = FXMLLoader.load(resource);
-//        Scene scene = new Scene(load);
-//        Stage stage = new Stage();
-//        stage.setScene(scene);
-//        stage.show();
         Parent load = FXMLLoader.load(getClass().getResource("/lk/ijse/cafe/view/ManagerCreateAccountForm.fxml"));
          pane.getChildren().clear();
          pane.getChildren().add(load);
 
-         //Navigation.navigation(Routs.MANAGER,pane);
-    }
-
-    private void idOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-//        String id=txtId.getText();
-//        ResultSet rst=CrudUtil.
-//        if (rst.next()) {
-//            txtUserName.setText(rst.getString("name"));
-//        }else {
-//            JOptionPane.showMessageDialog(this,"Manager not found!...");
-//        }
-//    }
-//        try {
-//
-//
-//            String id = txtId.getId();
-//
-//            String SQL = "Select * from system_uses where system_user_id=?";
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localHost/cafe", "root", "1234");
-//            PreparedStatement stm = connection.prepareStatement(SQL);
-//            stm.setObject(1, id);
-//
-//            ResultSet rst = stm.executeQuery();
-//            if (rst.next()) {
-//                txtUserName.setText(rst.getString("name"));
-//
-//            } else {
-//                //JOptionPane.showMessageDialog(this, "Manager Not Found!.,..");
-//                System.out.println("Manager not found1!...");
-//                //JOptionPane.showMessageDialog("Manager Not Founds!...");
-//            }
-//        }catch (ClassNotFoundException|SQLException ex){
-//            JOptionPane.showMessageDialog(this,ex.getMessage());
-//        }
-//    }
 
     }
+
+
     public void initialize(){
         txtUserNamePattern= Pattern.compile("^[a-zA-Z0-9]{4,}$");
         txtPasswordPattern=Pattern.compile("^[0-9]{3,}$");

@@ -80,6 +80,22 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <JFXButton layoutX="29.0" layoutY="293.0" onAction="#btnSupplierOnAction" prefHeight="55.0" prefWidth="295.0" style="-fx-background-color: #27ae60; -fx-background-radius: 30 30 30 30;" text="Supplier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="29.0" layoutY="373.0" onAction="#btnStokeItemOnAction" prefHeight="55.0" prefWidth="295.0" style="-fx-background-color: #27ae60; -fx-background-radius: 30 30 30 30;" text="Stoke Items" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="pane" layoutX="387.0" layoutY="97.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="710.0" prefWidth="891.0" style="-fx-background-color: white;" />

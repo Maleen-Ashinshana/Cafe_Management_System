@@ -3,6 +3,7 @@ package lk.ijse.cafe.dao.custom.impl;
 import lk.ijse.cafe.dao.custom.ItemDAO;
 import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.entity.ItemEntity;
+import lk.ijse.cafe.service.exception.NotFoundException;
 import lk.ijse.cafe.to.Item;
 import lk.ijse.cafe.util.CrudUtil;
 
@@ -32,25 +33,10 @@ public class ItemDAOIMPL implements ItemDAO{
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-//        try {
-//            ResultSet rst=CrudUtil.execute("SELECT * FROM items WHERE item_code=?");
-//            if (rst.next()){
-//                return (List<ItemEntity>) new ItemEntity(rst.getString(1),rst.getString(2),rst.getDouble(3));
-//
-//            }
-//            return null;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-
     }
 
     @Override
     public ArrayList<String> LoadItemCode() {
-        //String sql="SELECT item_code FROM items";
-        //ResultSet resultSet= null;
         try {
             ResultSet resultSet = CrudUtil.execute("SELECT item_code FROM items");
             ArrayList<String> codeList=new ArrayList<>();
@@ -59,6 +45,17 @@ public class ItemDAOIMPL implements ItemDAO{
 
             }
             return  codeList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteItem(String code) throws NotFoundException {
+        try {
+            CrudUtil.execute("Delete From items where item_code= '"+code+"'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -93,36 +90,25 @@ public class ItemDAOIMPL implements ItemDAO{
             throw new RuntimeException(e);
         }
 
-//        return  CrudUtil.execute("Update items set description=?,unit_price=? where item_code=?",
-//                entity.getDescription(),
-//                entity.getUnit_price(),
-//                entity.getCode()
-//        );
     }
 
     @Override
-    public ItemEntity deleteByPk(String code) throws ConstraintViolationException, SQLException, ClassNotFoundException {
-//        try {
-//            if (!CrudUtil.execute("DELETE FROM items WHERE code=?",pk)) throw new SQLException("FAIl");
-//        } catch (SQLException e) {
-//            throw new ConstraintViolationException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-        return CrudUtil.execute("Delete From items where item_code= '"+code+"'");
-
-//        try {
-//            if(!CrudUtil.execute("DELETE FROM Book WHERE isbn=?",code)) throw new SQLException("Failed to delete the book");
-//        } catch (SQLException | ClassNotFoundException e) {
-//            throw new ConstraintViolationException(e);
-//        }
+    public void delete(String code) throws NotFoundException {
+        try {
+            CrudUtil.execute("Delete From items where item_code= '"+code+"'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
 
     @Override
     public List<ItemEntity> findAll() {
         try {
-            ResultSet rst=CrudUtil.execute("SELECT * from items");
+            ResultSet rst=CrudUtil.execute("SELECT * FROM items");
             return  getItemList(rst);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -160,11 +146,6 @@ public class ItemDAOIMPL implements ItemDAO{
 
     }
 
-   // @Override
-//    public ItemEntity search(ItemEntity entity) throws ConstraintViolationException {
-//        return null;
-//    }
-
     @Override
     public ItemEntity search(ItemEntity entity) throws ConstraintViolationException {
         try {
@@ -179,17 +160,6 @@ public class ItemDAOIMPL implements ItemDAO{
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-//        String sql="SELECT  * FROM items WHERE item_code = ?";
-//        ResultSet result= CrudUtil.execute(sql,code);
-//        if (result.next()){
-//            return  new Item(
-//                    result.getString(1),
-//                    result.getString(2),
-//                    result.getDouble(3)
-//            );
-//        }
-//        return  null;
     }
 
     @Override
@@ -210,12 +180,10 @@ public class ItemDAOIMPL implements ItemDAO{
             while (rst.next()){
                 ItemEntity itemEntity=new ItemEntity(rst.getString("item_Code"),rst.getString("description"),rst.getInt("unit_price"));
                 itemList.add(itemEntity);
-
             }
             return  itemList;
         }catch (SQLException e){
             throw  new RuntimeException(e);
         }
-
     }
 }

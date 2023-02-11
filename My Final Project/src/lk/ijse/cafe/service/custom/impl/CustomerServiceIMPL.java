@@ -1,6 +1,7 @@
 package lk.ijse.cafe.service.custom.impl;
 
 import lk.ijse.cafe.dao.custom.CustomerDAO;
+import lk.ijse.cafe.dao.exception.ConstraintViolationException;
 import lk.ijse.cafe.dao.util.DAOFactory;
 import lk.ijse.cafe.dao.util.DaoTypes;
 import lk.ijse.cafe.db.DBConnection;
@@ -16,6 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CustomerServiceIMPL implements CustomerService {
     private final CustomerDAO customerDAO;
@@ -36,12 +38,25 @@ public class CustomerServiceIMPL implements CustomerService {
     }
 
     @Override
-    public CustomerDTO updateEmploye(CustomerDTO customerDTO) throws NotFoundException {
-        return null;
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) throws NotFoundException {
+        if (!customerDAO.existByPk(customerDTO.getCustomer_id()))throw new NotFoundException("Customer Not Found");
+        customerDAO.update(convertor.toCustomer(customerDTO));
+        return customerDTO;
     }
 
     @Override
-    public void deleteEmploye(String id) throws NotFoundException, InUseException {
+    public List<CustomerDTO> findAllCustomer() {
+        return customerDAO.findAll().stream().map(customer->convertor.fromCustomer(customer)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCustomer(String id) throws NotFoundException, InUseException {
+        if (!customerDAO.existByPk(id))throw  new NotFoundException("Customer Not Found");
+        try {
+            customerDAO.delete(id);
+        }catch (ConstraintViolationException e){
+            throw new RuntimeException();
+        }
 
     }
 

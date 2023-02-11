@@ -18,7 +18,12 @@ private Connection connection;
     @Override
     public StokeDetailsEntity save(StokeDetailsEntity entity) throws ConstraintViolationException {
         try {
-            if (CrudUtil.execute("INSERT INTO order_details(stoke_id,stoke_item_id,unitPrice,qty)VALUES(?,?,?,?)",
+            System.out.println(entity.getStoke_id());
+            System.out.println(entity.getStoke_item_id());
+            System.out.println(entity.getUnitPrice());
+            System.out.println(entity.getQty());
+
+            if (CrudUtil.execute("INSERT INTO stoke_details(stoke_id,stoke_item_id,unitPrice,qty)VALUES(?,?,?,?)",
                     entity.getStoke_id(),entity.getStoke_item_id(),entity.getUnitPrice(),entity.getQty()));
             return entity;
         } catch (SQLException e) {

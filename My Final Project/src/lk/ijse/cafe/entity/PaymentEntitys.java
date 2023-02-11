@@ -75,4 +75,16 @@ public class PaymentEntitys implements SupperEntity{
     public void setCustomer_name(String customer_name) {
         this.customer_name = customer_name;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentEntitys{" +
+                "id='" + id + '\'' +
+                ", date='" + date + '\'' +
+                ", price=" + price +
+                ", order_id='" + order_id + '\'' +
+                ", customer_id='" + customer_id + '\'' +
+                ", customer_name='" + customer_name + '\'' +
+                '}';
+    }
 }

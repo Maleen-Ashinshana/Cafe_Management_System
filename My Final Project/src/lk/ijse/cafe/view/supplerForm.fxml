@@ -8,41 +8,49 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" prefHeight="457.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.SupplerFormController">
+<AnchorPane fx:id="pane" prefHeight="710.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.SupplerFormController">
    <children>
-      <Text fill="#0dd0c3" layoutX="287.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier">
+      <Text fill="#0dd0c3" layoutX="377.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier">
          <font>
             <Font name="System Bold" size="39.0" />
          </font>
       </Text>
-      <Text layoutX="16.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="27.04052734375">
+      <Text layoutX="20.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="27.04052734375">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="txtId" layoutX="53.0" layoutY="114.0" onAction="#txtIdOnAction" promptText="Supplier Id" />
-      <Text layoutX="244.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="66.04052734375">
+      <JFXTextField fx:id="txtId" layoutX="56.0" layoutY="125.0" onAction="#txtIdOnAction" prefHeight="42.0" prefWidth="183.0" promptText="Supplier Id" />
+      <Text layoutX="254.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="66.04052734375">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="txtName" layoutX="322.0" layoutY="114.0" promptText="Supplier Name" />
-      <Text layoutX="501.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="75.04052734375">
+      <JFXTextField fx:id="txtName" layoutX="337.0" layoutY="125.0" prefHeight="42.0" prefWidth="183.0" promptText="Supplier Name" />
+      <Text layoutX="562.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="75.04052734375">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="txtAddress" layoutX="579.0" layoutY="114.0" promptText="Supplier Address" />
-      <JFXButton layoutX="472.0" layoutY="185.0" onAction="#btnAddOnAction" style="-fx-background-color: Blue; -fx-background-radius: 30 30 30 30;" text="Add" />
-      <JFXButton layoutX="555.0" layoutY="185.0" onAction="#btnDeleteOnAction" style="-fx-background-color: Red; -fx-background-radius: 30 30 30 30;" text="Delete" />
-      <JFXButton layoutX="645.0" layoutY="185.0" onAction="#btnUpdateOnAction" style="-fx-background-color: Green; -fx-background-radius: 30 30 30 30;" text="Update" />
-      <TableView fx:id="tblSupplier" layoutX="13.0" layoutY="246.0" prefHeight="158.0" prefWidth="728.0">
+      <JFXTextField fx:id="txtAddress" layoutX="678.0" layoutY="125.0" prefHeight="42.0" prefWidth="183.0" promptText="Supplier Address" />
+      <JFXButton layoutX="523.0" layoutY="204.0" onAction="#btnAddOnAction" prefHeight="42.0" prefWidth="87.0" style="-fx-background-color: Blue; -fx-background-radius: 30 30 30 30;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="634.0" layoutY="204.0" onAction="#btnDeleteOnAction" prefWidth="87.0" style="-fx-background-color: Red; -fx-background-radius: 30 30 30 30;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="738.0" layoutY="202.0" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="87.0" style="-fx-background-color: Green; -fx-background-radius: 30 30 30 30;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></JFXButton>
+      <TableView fx:id="tblSupplier" layoutX="13.0" layoutY="269.0" prefHeight="433.0" prefWidth="862.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="166.0" text="Id" />
-          <TableColumn fx:id="colName" prefWidth="318.0" text="Name" />
-            <TableColumn fx:id="colAddress" prefWidth="242.0" text="Address" />
+          <TableColumn fx:id="tblSupplierId" prefWidth="203.0" text="Id" />
+          <TableColumn fx:id="colName" prefWidth="332.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="326.0" text="Address" />
         </columns>
       </TableView>
-      <JFXButton layoutX="657.0" layoutY="413.0" onAction="#btnReloadOnAction" style="-fx-background-color: Red; -fx-background-radius: 30 30 30 30;" text="Reload" />
    </children>
 </AnchorPane>

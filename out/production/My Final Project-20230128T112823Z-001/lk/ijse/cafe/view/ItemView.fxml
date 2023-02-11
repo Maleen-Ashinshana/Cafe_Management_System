@@ -12,40 +12,32 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cafe.controller.ItemViewController">
    <children>
-      <Text fill="#15ebce" layoutX="407.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items">
+      <Text fill="#15ebce" layoutX="407.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items">
          <font>
             <Font name="System Bold" size="37.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="13.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="866.0">
+      <AnchorPane layoutX="13.0" layoutY="117.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="876.0">
          <children>
-            <ImageView fitHeight="479.0" fitWidth="866.0" layoutX="-1.0" opacity="0.26">
+            <ImageView fitHeight="558.0" fitWidth="865.0" layoutX="-1.0" layoutY="-33.0" opacity="0.33">
                <image>
                   <Image url="@../access/images/banner.jpg" />
                </image>
             </ImageView>
-            <TableView fx:id="tblItem" layoutY="-27.0" prefHeight="463.0" prefWidth="866.0" stylesheets="@../../../../css/table.css">
+            <TableView fx:id="tblItem" layoutX="-2.0" layoutY="-33.0" opacity="0.92" prefHeight="558.0" prefWidth="865.0" stylesheets="@../../../../css/table.css">
               <columns>
                 <TableColumn fx:id="tblItemCode" prefWidth="123.0" text="Item Code" />
                 <TableColumn fx:id="tblDescription" prefWidth="588.0" text="Description" />
-                  <TableColumn fx:id="tblUnitPrice" prefWidth="154.0" text="Unit Price" />
-                  <TableColumn fx:id="tblUnitPrice1" prefWidth="85.0" text="Action" />
+                  <TableColumn fx:id="tblUnitPrice" prefWidth="153.0" text="Unit Price" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="772.0" layoutY="610.0" onAction="#btnRealoadOnAction" prefHeight="41.0" prefWidth="105.0" style="-fx-background-color: Red; -fx-background-radius: 40 40 40 40;" text="ReLoad" />
-      <ImageView fitHeight="16.0" fitWidth="22.0" layoutX="778.0" layoutY="623.0">
-         <image>
-            <Image url="@../access/logo/replay_FILL0_wght400_GRAD0_opsz48.png" />
-         </image>
-      </ImageView>
-      <JFXButton layoutX="412.0" layoutY="621.0" onAction="#btnEditOnAction" prefHeight="44.0" prefWidth="90.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 30 30 30 30;" text="New" textFill="#eeebeb">
+      <JFXButton layoutX="417.0" layoutY="648.0" onAction="#btnEditOnAction" prefHeight="44.0" prefWidth="90.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 30 30 30 30;" text="Edite" textFill="#eeebeb">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXButton>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
       <AnchorPane fx:id="subPane" layoutX="127.0" layoutY="144.0" prefHeight="353.0" prefWidth="633.0" style="-fx-background-color: #95a5a6; -fx-background-radius: 40 40 40 40;">
          <children>
             <Text layoutX="33.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Code:">
@@ -75,7 +67,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="167.0" layoutY="277.0" onAction="#btnDeleteOnAction" style="-fx-background-color: Red; -fx-background-radius: 30 30 30;" text="Delete" textFill="#fffefe">
+            <JFXButton fx:id="btnDeleted" layoutX="167.0" layoutY="277.0" onAction="#btnDeleteOnAction" style="-fx-background-color: Red; -fx-background-radius: 30 30 30;" text="Delete" textFill="#fffefe">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

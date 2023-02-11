@@ -4,10 +4,13 @@ import java.sql.Date;
 
 public class StokeEntity implements SupperEntity{
     private String stoke_id;
-    private Date date;
+    private String date;
     private String supplyer_id;
 
-    public StokeEntity(String stoke_id, Date date, String supplyer_id) {
+    public StokeEntity() {
+    }
+
+    public StokeEntity(String stoke_id, String date, String supplyer_id) {
         this.stoke_id = stoke_id;
         this.date = date;
         this.supplyer_id = supplyer_id;
@@ -21,11 +24,11 @@ public class StokeEntity implements SupperEntity{
         this.stoke_id = stoke_id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -35,5 +38,14 @@ public class StokeEntity implements SupperEntity{
 
     public void setSupplyer_id(String supplyer_id) {
         this.supplyer_id = supplyer_id;
+    }
+
+    @Override
+    public String toString() {
+        return "StokeEntity{" +
+                "stoke_id='" + stoke_id + '\'' +
+                ", date='" + date + '\'' +
+                ", supplyer_id='" + supplyer_id + '\'' +
+                '}';
     }
 }

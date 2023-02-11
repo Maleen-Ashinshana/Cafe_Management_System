@@ -1,14 +1,12 @@
 package lk.ijse.cafe.model;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import lk.ijse.cafe.to.CartDetail;
+import lk.ijse.cafe.dto.CartDetailDTO;
 import lk.ijse.cafe.to.Item;
 import lk.ijse.cafe.to.ItemDetails;
 import lk.ijse.cafe.util.CrudUtil;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -97,8 +95,8 @@ public class ItemModel {
         return  codeList;
     }
 
-    public static boolean updateQty(ArrayList<CartDetail>cartDetails) throws SQLException, ClassNotFoundException {
-        for (CartDetail cartDetail:cartDetails) {
+    public static boolean updateQty(ArrayList<CartDetailDTO>cartDetails) throws SQLException, ClassNotFoundException {
+        for (CartDetailDTO cartDetail:cartDetails) {
             if (!updateQty(new Item(cartDetail.getCode(), cartDetail.getDescription(), cartDetail.getUnitPrice()))){
                    return  false;
 

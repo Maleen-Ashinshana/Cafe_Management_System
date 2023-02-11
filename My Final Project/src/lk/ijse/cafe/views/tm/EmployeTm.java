@@ -13,6 +13,10 @@ public class EmployeTm {
     public EmployeTm() {
     }
 
+    public EmployeTm(String employe_id) {
+        this.employe_id = employe_id;
+    }
+
     public EmployeTm(String employe_id, String name, String address, String email, int contact_num, String gender, String type, double salary) {
         this.employe_id = employe_id;
         this.name = name;

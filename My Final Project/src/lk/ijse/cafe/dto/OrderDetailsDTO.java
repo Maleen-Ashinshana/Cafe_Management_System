@@ -7,12 +7,12 @@ public class OrderDetailsDTO {
     private String item_code;
     private int qty;
     private double unitPrice;
-    private Date date;
+    private String date;
 
     public OrderDetailsDTO() {
     }
 
-    public OrderDetailsDTO(String order_id, String item_code, int qty, double unitPrice, Date date) {
+    public OrderDetailsDTO(String order_id, String item_code, int qty, double unitPrice, String date) {
         this.order_id = order_id;
         this.item_code = item_code;
         this.qty = qty;
@@ -52,11 +52,11 @@ public class OrderDetailsDTO {
         this.unitPrice = unitPrice;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

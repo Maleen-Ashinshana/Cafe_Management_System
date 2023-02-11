@@ -37,39 +37,39 @@ public class SupplyeerModel {
         return null;
 
     }
-
-    public static boolean isAdded(Supplyer supplyer) throws SQLException, ClassNotFoundException {
-        return  CrudUtil.execute("INSERT INTO supplyer VALUES(?,?,?) ",
-                supplyer.getId(),
-                supplyer.getName(),
-                supplyer.getAddress()
-        );
-
-    }
-
-    public static boolean deleteSuppler(String id) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("DELETE FROM supplyer WHERE supplyer_id='"+id+"'");
-    }
-
-    public static boolean update(Supplyer supplyer) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("UPDATE supplyer set name=?,address=? WHERE supplyer_id=?",
-                supplyer.getName(),
-                supplyer.getAddress(),
-                supplyer.getId()
-
-        );
-
-    }
-
-    public static ObservableList<Supplyer> getAll() throws SQLException, ClassNotFoundException {
-        String sql= "SELECT * FROM supplyer";
-        ResultSet resultSet=CrudUtil.execute(sql);
-        ObservableList<Supplyer>supplyerObservableList= FXCollections.observableArrayList();
-        while (resultSet.next()){
-            Supplyer supplyer=new Supplyer(resultSet.getString("supplyer_id"),resultSet.getString("name"),resultSet.getString("address"));
-        supplyerObservableList.add(supplyer);
-        }
-        return supplyerObservableList;
-    }
+//
+//    public static boolean isAdded(Supplyer supplyer) throws SQLException, ClassNotFoundException {
+//        return  CrudUtil.execute("INSERT INTO supplyer VALUES(?,?,?) ",
+//                supplyer.getId(),
+//                supplyer.getName(),
+//                supplyer.getAddress()
+//        );
+//
+//    }
+//
+//    public static boolean deleteSuppler(String id) throws SQLException, ClassNotFoundException {
+//        return CrudUtil.execute("DELETE FROM supplyer WHERE supplyer_id='"+id+"'");
+//    }
+//
+//    public static boolean update(Supplyer supplyer) throws SQLException, ClassNotFoundException {
+//        return CrudUtil.execute("UPDATE supplyer set name=?,address=? WHERE supplyer_id=?",
+//                supplyer.getName(),
+//                supplyer.getAddress(),
+//                supplyer.getId()
+//
+//        );
+//
+//    }
+//
+//    public static ObservableList<Supplyer> getAll() throws SQLException, ClassNotFoundException {
+//        String sql= "SELECT * FROM supplyer";
+//        ResultSet resultSet=CrudUtil.execute(sql);
+//        ObservableList<Supplyer>supplyerObservableList= FXCollections.observableArrayList();
+//        while (resultSet.next()){
+//            Supplyer supplyer=new Supplyer(resultSet.getString("supplyer_id"),resultSet.getString("name"),resultSet.getString("address"));
+//        supplyerObservableList.add(supplyer);
+//        }
+//        return supplyerObservableList;
+//    }
 
 }

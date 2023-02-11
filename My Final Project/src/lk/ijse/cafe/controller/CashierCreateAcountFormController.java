@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import lk.ijse.cafe.dto.SystemUsesDTO;
 import lk.ijse.cafe.service.ServiceFactory;
@@ -71,68 +72,45 @@ public class CashierCreateAcountFormController {
         boolean isEmailMatched=emailPatten.matcher(txtEmail.getText()).matches();
         boolean isPasswordMatched=passwordPatten.matcher(txtPassword.getText()).matches();
 
-//        if (isIdMatched){
-//            if (isNameMatched){
-//                if (isAddressMatched){
-//                    if (isContMatched){
-//                        if (isTypeMatched){
-//                            if (isEmailMatched){
-//                                if (isPasswordMatched){
-//                                    System.out.println("Account is Create Start");
-//                                    //new Alert(Alert.AlertType.CONFIRMATION,"Account Create Success");
-//                                }else {
-//                                    txtPassword.setFocusColor(Paint.valueOf("Red"));
-//                                    txtPassword.requestFocus();
-//                                }
-//                            }else{
-//                                txtEmail.setFocusColor(Paint.valueOf("Red"));
-//                                txtEmail.requestFocus();
-//                            }
-//                        }else{
-//                            txtType.setFocusColor(Paint.valueOf("Red"));
-//                            txtType.requestFocus();
-//                        }
-//                    }else{
-//                        txtCon.setFocusColor(Paint.valueOf("Red"));
-//                        txtCon.requestFocus();
-//                    }
-//                }else{
-//                    txtAddress.setFocusColor(Paint.valueOf("Red"));
-//                    txtAddress.requestFocus();
-//                }
-//            }else{
-//                txtName.setFocusColor(Paint.valueOf("Red"));
-//                txtName.requestFocus();
-//            }
-//        }else{
-//            txtId.setFocusColor(Paint.valueOf("Red"));
-//            txtId.requestFocus();
-//        }
+        if (isIdMatched){
+            if (isNameMatched){
+                if (isAddressMatched){
+                    if (isContMatched){
+                        if (isTypeMatched){
+                            if (isEmailMatched){
+                                if (isPasswordMatched){
+                                    System.out.println("Account is Create Start");
+                                    //new Alert(Alert.AlertType.CONFIRMATION,"Account Create Success");
+                                }else {
+                                    txtPassword.setFocusColor(Paint.valueOf("Red"));
+                                    txtPassword.requestFocus();
+                                }
+                            }else{
+                                txtEmail.setFocusColor(Paint.valueOf("Red"));
+                                txtEmail.requestFocus();
+                            }
+                        }else{
+                            txtType.setFocusColor(Paint.valueOf("Red"));
+                            txtType.requestFocus();
+                        }
+                    }else{
+                        txtCon.setFocusColor(Paint.valueOf("Red"));
+                        txtCon.requestFocus();
+                    }
+                }else{
+                    txtAddress.setFocusColor(Paint.valueOf("Red"));
+                    txtAddress.requestFocus();
+                }
+            }else{
+                txtName.setFocusColor(Paint.valueOf("Red"));
+                txtName.requestFocus();
+            }
+        }else{
+            txtId.setFocusColor(Paint.valueOf("Red"));
+            txtId.requestFocus();
+        }
 
-//        String id=txtId.getText();
-//        String name=txtName.getText();
-//        String address=txtAddress.getText();
-//        int tel=Integer.parseInt(txtCon.getText());
-//        String type=txtType.getText();
-//        String email=txtEmail.getText();
-//        String password=txtPassword.getText();
-//
-//        Cashier cashier=new Cashier(id,name,address,tel,type,email,password);
-//
-//        try {
-//            boolean isCreate= CashierModel.save(cashier);
-//            if (isCreate){
-//                new Alert(Alert.AlertType.CONFIRMATION,"Account Is Created!...");
-//                pane.getChildren().clear();
-//                Navigation.navigation(Routs.CASHIER,pane);
-//            }else{
-//                new Alert(Alert.AlertType.WARNING,"No!...");
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
+
         SystemUsesDTO systemUsesDTO=new SystemUsesDTO(txtId.getText(),txtName.getText(),txtAddress.getText(),Integer.parseInt(txtCon.getText()),txtType.getText(),txtEmail.getText(),txtPassword.getText());
         try {
             if (systemUsesService.saveCashier(systemUsesDTO)==null){

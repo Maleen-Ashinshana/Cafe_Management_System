@@ -13,6 +13,14 @@ public class PaymentDTOS {
     public PaymentDTOS() {
     }
 
+    public PaymentDTOS(String date, double price, String order_id, String customer_id, String customer_name) {
+        this.date = date;
+        this.price = price;
+        this.order_id = order_id;
+        this.customer_id = customer_id;
+        this.customer_name = customer_name;
+    }
+
     public PaymentDTOS(String id, String date, double price, String order_id, String customer_id, String customer_name) {
         this.id = id;
         this.date = date;

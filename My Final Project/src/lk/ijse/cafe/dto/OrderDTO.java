@@ -7,7 +7,11 @@ public class OrderDTO {
     private Date date;
     private String customer_id;
 
-    public OrderDTO(String text, String lblOrderDateText, String lblPayCustomerIdText) {
+//    public OrderDTO(String text, String lblOrderDateText, String lblPayCustomerIdText) {
+//    }
+
+
+    public OrderDTO(String order_id, String date, String customer_id) {
     }
 
     public OrderDTO(String order_id) {

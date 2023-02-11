@@ -1,13 +1,15 @@
 package lk.ijse.cafe.service.custom;
 
-import lk.ijse.cafe.dto.EmployeDTO;
 import lk.ijse.cafe.dto.OrderDTO;
+import lk.ijse.cafe.dto.OrderDetailsDTO;
 import lk.ijse.cafe.service.SuperSevice;
 import lk.ijse.cafe.service.exception.DuplicateException;
 import lk.ijse.cafe.service.exception.InUseException;
 import lk.ijse.cafe.service.exception.NotFoundException;
-import org.apache.hadoop.hive.metastore.api.Order;
+import lk.ijse.cafe.dto.CartDetailDTO;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface OrderService extends SuperSevice {
@@ -20,4 +22,8 @@ public interface OrderService extends SuperSevice {
     public List<OrderDTO> findAllOrder();
 
     public OrderDTO searchOrder(String text);
+
+    boolean placeOrder(String orderId, String date, String customerId, ArrayList<OrderDetailsDTO> orderDetailsDTOS) throws SQLException, ClassNotFoundException;
+
+    String getNextOrderId();
 }

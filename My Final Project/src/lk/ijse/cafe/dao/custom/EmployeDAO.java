@@ -7,5 +7,5 @@ import lk.ijse.cafe.entity.ItemEntity;
 import org.apache.poi.hssf.record.formula.functions.T;
 
 public interface EmployeDAO extends CrudDAO<EmployeEntity,String> {
-    public EmployeDTO newSearch(String id);
+
 }

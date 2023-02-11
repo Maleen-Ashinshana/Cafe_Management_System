@@ -6,6 +6,8 @@ public class StokeItemsTm {
     private double unitPrice;
     private int qty;
 
+
+
     public StokeItemsTm() {
     }
 
@@ -15,7 +17,6 @@ public class StokeItemsTm {
         this.unitPrice = unitPrice;
         this.qty = qty;
     }
-
     public String getId() {
         return id;
     }

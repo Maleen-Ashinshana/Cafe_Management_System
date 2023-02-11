@@ -6,17 +6,29 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.cafe.dto.CustomerDTO;
 import lk.ijse.cafe.model.CustomerModel;
+import lk.ijse.cafe.service.ServiceFactory;
+import lk.ijse.cafe.service.ServiceTypes;
+import lk.ijse.cafe.service.custom.CustomerService;
+import lk.ijse.cafe.service.exception.DuplicateException;
+import lk.ijse.cafe.service.exception.NotFoundException;
 import lk.ijse.cafe.tm.CustomerTM;
 import lk.ijse.cafe.to.Customer;
+import lk.ijse.cafe.views.tm.CustomerTm;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CustomerFormController {
+    public JFXTextField txtCustomerId;
     @FXML
     private AnchorPane pane;
     @FXML
@@ -29,77 +41,94 @@ public class CustomerFormController {
     private JFXTextField customerId;
     @FXML
     private JFXTextField customerName;
+    public CustomerDTO customerDTO;
+    public CustomerService customerService;
 
     private ObservableList<CustomerTM> oblist= FXCollections.observableArrayList();
 
+    public void  initialize() throws SQLException, ClassNotFoundException {
+        CustomerView();
+        this.customerService= ServiceFactory.getInstance().getService(ServiceTypes.CUSTOMER);
+       list();
+    }
+    public void list(){
+        List<CustomerTm> list=customerService.findAllCustomer().stream().map(customer->new CustomerTm(customer.getCustomer_id(),customer.getName())).collect(Collectors.toList());
+        tblCustomer.setItems(FXCollections.observableArrayList(list));
+    }
+
     @FXML
     private void cusromerNameOnAction(ActionEvent actionEvent) {
-        String id=customerId.getText();
-        try {
-            Customer customer=CustomerModel.searchCustomer(id);
-            if (customer!=null){
-                fillDate(customer);
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        CustomerDTO customerDTO=customerService.findById(txtCustomerId.getText());
+        if (customerDTO!=null){
+            fillDate(customerDTO);
         }
     }
 
     @FXML
     private void btnAddOnAction(ActionEvent actionEvent) {
-        String id=customerId.getText();
-        String name=customerName.getText();
-
-        Customer customer=new Customer(id,name);
-//        if (!oblist.isEmpty()){
-//            L1:
-//            for (int i=0;i<tblCustomer.getItems().size();i++){
-//                if (colCustomerId.getCellData(i).equals(id)){
-//                    oblist.get(i).getName();
-//                    return;
-//                }
-//            }
-//        }
-
-
+        CustomerDTO customerDTO=new CustomerDTO(txtCustomerId.getText(),customerName.getText());
         try {
-            boolean isAdded= CustomerModel.addCustomer(customer);
-            if (isAdded){
-                new Alert(Alert.AlertType.CONFIRMATION,"Added!...").show();
-            }else{
-                new Alert(Alert.AlertType.WARNING,"No!...").show();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            if (customerService.saveCustomer(customerDTO)==null){
+                new Alert(Alert.AlertType.ERROR,"Fail To Save Customer").show();
+                return;
+            }new Alert(Alert.AlertType.CONFIRMATION,"Saved!").show();
+            tblCustomer.getItems().add(new CustomerTm(customerDTO.getCustomer_id(), customerDTO.getName()));
+            txtCustomerId.clear();
+            customerName.clear();
+        }catch (DuplicateException e){
+            new Alert(Alert.AlertType.ERROR,"CustomerDTO Already Exists!").show();
+            txtCustomerId.selectAll();
+            txtCustomerId.requestFocus();
         }
     }
-
     @FXML
     private void btnUpdateOnAction(ActionEvent actionEvent) {
+        CustomerDTO updateCustomer=new CustomerDTO(txtCustomerId.getText(),customerName.getText());
+        try {
+            customerService.updateCustomer(updateCustomer);
+            int selectedIndex=tblCustomer.getSelectionModel().getSelectedIndex();
+            tblCustomer.getItems().remove(selectedIndex+1);
+            new Alert(Alert.AlertType.INFORMATION,"update successful").show();
+            txtCustomerId.clear();
+            customerName.clear();
+            list();
+        }catch (NotFoundException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
     }
-    private void fillDate(Customer customer){
-        colCustomerId.setText(customer.getId());
-        colCustomerName.setText(customer.getName());
+    private void fillDate(CustomerDTO customerDTO){
+        txtCustomerId.setText(customerDTO.getCustomer_id());
+        customerName.setText(customerDTO.getName());
     }
+
     private void CustomerView(){
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
     }
 
-    public void btnRefreshOnAction(ActionEvent actionEvent) {
-        try {
-            ObservableList<Customer> customersList=CustomerModel.getAllCustomer();
-            tblCustomer.setItems(customersList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+        Alert alert=new Alert(Alert.AlertType.WARNING,"are you sure to delete the customer", ButtonType.YES,ButtonType.NO);
+        Optional<ButtonType> result=alert.showAndWait();
+        if (result.isPresent() && result.get()==ButtonType.YES){
+            try {
+                customerService.deleteCustomer(txtCustomerId.getText());
+                new Alert(Alert.AlertType.INFORMATION,"employe deleted").show();
+                tblCustomer.getItems().removeAll(tblCustomer.getSelectionModel().getSelectedItem());
+                txtCustomerId.clear();
+                customerName.clear();
+                list();
+            }catch (NotFoundException e){
+                new Alert(Alert.AlertType.WARNING,"No").show();
+            }
         }
+
     }
-    public void  initialize(){
-        CustomerView();
+
+    public void txtCustomerIdOnAction(ActionEvent actionEvent) {
+      CustomerDTO customerDTO1=customerService.findById(txtCustomerId.getText());
+      if (customerDTO1!=null){
+          fillDate(customerDTO1);
+      }
     }
 }

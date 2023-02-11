@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class OrderEntity implements SupperEntity {
     private String order_id;
-    private Date date;
+    private String date;
     private String customer_id;
 
     public OrderEntity() {
@@ -16,7 +16,7 @@ public class OrderEntity implements SupperEntity {
         this.order_id = order_id;
     }
 
-    public OrderEntity(String order_id, Date date, String customer_id) {
+    public OrderEntity(String order_id, String date, String customer_id) {
         this.order_id = order_id;
         this.date = date;
         this.customer_id = customer_id;
@@ -30,11 +30,11 @@ public class OrderEntity implements SupperEntity {
         this.order_id = order_id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

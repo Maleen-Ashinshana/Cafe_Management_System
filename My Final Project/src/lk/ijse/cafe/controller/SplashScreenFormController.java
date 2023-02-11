@@ -27,32 +27,17 @@ public class SplashScreenFormController implements Initializable {
     private ProgressBar progressBar;
     
     public static ProgressBar statProgressBar;
-    
-    /*@FXML 
-    private ImageView imageView; */
+
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-       
-        
+
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        label = progress ;
        statProgressBar = progressBar;
-       
-     /*  
-       try {
-            Image image = new Image(new FileInputStream("src\\splashscreenproject\\sample.png"));
-            
-            imageView.setImage(image);
-            imageView.setCache(true);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      */
-       
     }    
     
 }
